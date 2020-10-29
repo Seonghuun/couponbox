@@ -15,7 +15,11 @@ class GetCouponScreen extends Component{
 
   render () {
     return (
-      <View>
+      <View style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }}>
         <Text>Get Coupon</Text>
         <QRCode
           value="aa"

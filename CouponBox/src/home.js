@@ -25,6 +25,13 @@ class HomeScreen extends Component{
                 this.props.navigation.navigate('GetCoupon')
             }}
         />
+        <Text/>
+        <Button
+            title="쿠폰 사용"
+            onPress={()=>{
+                this.props.navigation.navigate('UseCoupon')
+            }}
+        />
       </View>
     )
   }
