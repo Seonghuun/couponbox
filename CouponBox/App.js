@@ -22,6 +22,7 @@ class App extends Component{
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Home" component={HomeScreen}/>
+          <Stack.Screen name="GetCoupon" component={GetCouponScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     )
