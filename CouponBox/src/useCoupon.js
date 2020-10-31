@@ -7,8 +7,7 @@
  */
 import 'react-native-gesture-handler';
 import React, { Component,useState } from 'react';
-import { View, Text, Button, Dimensions, ScrollView, StatusBar } from 'react-native';
-
+import { View, Text, Button, Dimensions, ScrollView, StatusBar, Image } from 'react-native';
 
 
 class UseCouponScreen extends Component{
@@ -42,6 +41,8 @@ class UseCouponScreen extends Component{
 
     const { width, height } = Dimensions.get('window');
 
+    const backgrounduri = "https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2Fbackground_example.png?alt=media&token=5a4fb9e8-ddf8-4ff8-82b7-ce8f05f04e73";
+
     return (
       
       <ScrollView
@@ -50,18 +51,28 @@ class UseCouponScreen extends Component{
         scrollEventThrottle={16}
         pagingEnabled={true}
       >
-        <View style={{ width, height }}>
+        <View style={{ width, height, alignItems:'center'}}>
           <Text>카페 이름 : {stamps[0].CafeName}</Text>
           <Text>쿠폰 갯수 : {stamps[0].number}</Text>
-          <Button
-            title="새로고침"
+          <Text/>
+          <Image
+            source = {{uri: backgrounduri }}
+            style={{width: 300, height:400}}
+            />
+            <Text/>
+            <Button
+            title="값 받기"
             onPress={()=>{handleClick()}}
           />
-          
         </View>
-        <View style={{ width, height }}>
-        <Text>카페 이름 : {stamps[1].CafeName}</Text>
-        <Text>쿠폰 갯수 : {stamps[1].number}</Text>
+        <View style={{ width, height, alignItems:'center' }}>
+          <Text>카페 이름 : {stamps[1].CafeName}</Text>
+          <Text>쿠폰 갯수 : {stamps[1].number}</Text>
+          <Text/>
+          <Image
+            source = {{uri: backgrounduri }}
+            style={{width: 300, height:400}}
+            />
         </View>
         <View style={{ width, height }}>
           <Text>Screen 3</Text>
