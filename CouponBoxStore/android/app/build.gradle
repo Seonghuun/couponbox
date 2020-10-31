@@ -133,6 +133,11 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        // 아래 부분 추가 
+        missingDimensionStrategy 'react-native-camera', 'general'
+        missingDimensionStrategy 'react-native-camera', 'mlkit'
+        // multiDex 에러를 위해 미리 추가해두는 것이 좋음
+        multiDexEnabled true
     }
     splits {
         abi {
