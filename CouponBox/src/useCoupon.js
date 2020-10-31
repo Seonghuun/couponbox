@@ -7,7 +7,7 @@
  */
 import 'react-native-gesture-handler';
 import React, { Component,useState } from 'react';
-import { View, Text, Button, Dimensions, ScrollView, StatusBar, Image } from 'react-native';
+import { View, Text, Button, Dimensions, ScrollView, StatusBar, Image, ImageBackground } from 'react-native';
 
 
 class UseCouponScreen extends Component{
@@ -41,10 +41,9 @@ class UseCouponScreen extends Component{
 
     const { width, height } = Dimensions.get('window');
 
-    const backgrounduri = "https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2Fbackground_example.png?alt=media&token=5a4fb9e8-ddf8-4ff8-82b7-ce8f05f04e73";
-
+    const stamp_bg_uri = "https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2Fbg_example.png?alt=media&token=9e0b055a-222f-41f8-bcde-2ad88b63ed97";
+    const stamp_img_uri = "https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2F%EA%B7%B8%EB%A6%BC3.png?alt=media&token=19ad8f65-8f6a-432c-8e19-64214cafba3d";
     return (
-      
       <ScrollView
         style={{ flex: 1 }}
         horizontal={true}
@@ -55,12 +54,29 @@ class UseCouponScreen extends Component{
           <Text>카페 이름 : {stamps[0].CafeName}</Text>
           <Text>쿠폰 갯수 : {stamps[0].number}</Text>
           <Text/>
-          <Image
-            source = {{uri: backgrounduri }}
+          <ImageBackground
+            source = {{uri: stamp_bg_uri }}
             style={{width: 300, height:400}}
-            />
-            <Text/>
-            <Button
+          >
+          <Text/>
+          <Image
+            source = {{uri: stamp_img_uri}}
+            style={{width: 80, height:80, top:10, left:40}}
+          />
+          <Image
+            source = {{uri: stamp_img_uri}}
+            style={{width: 80, height:80, top:-70, left:170}}
+          />
+          <Image
+            source = {{uri: stamp_img_uri}}
+            style={{width: 80, height:80, top:-60, left:40}}
+          />
+          <Image
+            source = {{uri: stamp_img_uri}}
+            style={{width: 80, height:80, top:-140, left:170}}
+          />
+          </ImageBackground>
+          <Button
             title="값 받기"
             onPress={()=>{handleClick()}}
           />
@@ -70,7 +86,7 @@ class UseCouponScreen extends Component{
           <Text>쿠폰 갯수 : {stamps[1].number}</Text>
           <Text/>
           <Image
-            source = {{uri: backgrounduri }}
+            source = {{uri: stamp_bg_uri }}
             style={{width: 300, height:400}}
             />
         </View>
