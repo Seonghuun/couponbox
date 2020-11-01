@@ -18,8 +18,6 @@ import UseCouponScreen from './src/useCoupon';
 
 const Stack = createStackNavigator();
 
-
-
 class App extends Component{
   render () {
     return (
@@ -38,3 +36,5 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
+          //<Stack.Screen name="CouponPan" component={CouponPannel}/>

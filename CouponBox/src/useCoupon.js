@@ -9,6 +9,7 @@ import 'react-native-gesture-handler';
 import React, { Component,useState } from 'react';
 import { StyleSheet, View, Text, Button, Dimensions, ScrollView, StatusBar, Image, ImageBackground } from 'react-native';
 import { event } from 'react-native-reanimated';
+import CouponPannel from './couponPannel.js';
 
 class UseCouponScreen extends Component{
   state = {
@@ -17,11 +18,11 @@ class UseCouponScreen extends Component{
   render () {
     //스탬프 개수 보관하는 배열
     const stamps = [
-      { 'CafeName': "default1", 'CafeID': "a1234", 'number' : 4},
-      { 'CafeName': "default2", 'CafeID': "a1234", 'number' : 6},
-      { 'CafeName': "default3", 'CafeID': "a1234", 'number' : 3},
-      { 'CafeName': "default4", 'CafeID': "a1234", 'number' : 8},
-      { 'CafeName': "default5", 'CafeID': "a1234", 'number' : 9},
+      { CafeName: "default1", CafeID: "a1111", number : 4},
+      { CafeName: "default2", CafeID: "a1222", number : 2},
+      { CafeName: "default3", CafeID: "a1333", number : 3},
+      { CafeName: "default4", CafeID: "a1444", number : 4},
+      { CafeName: "default5", CafeID: "a1555", number : 10},
     ]
 
     //파이어베이스 db를 인자로 받아오는 부분
@@ -113,20 +114,20 @@ class UseCouponScreen extends Component{
             onPress={()=>{handleClick()}}
           />
         </View>
-        <View style={{ width, height, alignItems:'center' }}>
-          <Text>카페 이름 : {stamps[1].CafeName}</Text>
-          <Text>쿠폰 갯수 : {stamps[1].number}</Text>
-          <Text/>
-          <Image
-            source = {{uri: stamp_bg_uri }}
-            style={{width: 300, height:400}}
-            />
+        <View style={{ width, height }}>
+        <CouponPannel 
+          param = {{cafeName: stamps[1].CafeName, stampNum: stamps[1].number}}
+          />
         </View>
         <View style={{ width, height }}>
-          <Text>Screen 3</Text>
+        <CouponPannel 
+          param = {{cafeName: stamps[2].CafeName, stampNum: stamps[2].number}}
+          />
         </View>
         <View style={{ width, height }}>
-          <Text>Screen 4</Text>
+        <CouponPannel 
+          param = {{cafeName: stamps[3].CafeName, stampNum: stamps[3].number}}
+          />
         </View>
         <View style={{width, height }}>
           <Text>Use Coupon</Text>
@@ -135,7 +136,6 @@ class UseCouponScreen extends Component{
       <View style={styles.paginationWrapper}>
         {Array.from(Array(5).keys()).map((key, index) => (
           <View style={[styles.paginationDots, {opacity:pageIndex === index ? 1 : 0.2 }]} key={index} />
-
         ))}
       </View>
       </>

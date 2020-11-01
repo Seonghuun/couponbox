@@ -8,7 +8,6 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { AppRegistry, View, Text, TextInput } from 'react-native';
-import { WebView } from 'react-native-webview';
 import QRCode from 'react-native-qrcode-svg';
 
 class GetCouponScreen extends Component{

@@ -11,6 +11,7 @@ import { View, Text, Button } from 'react-native';
 import firebase from 'firebase';
 import 'firebase/firestore';
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyBUyzSomwRy8atRgJHDuJT01Uh4GjqqsT0",
   authDomain: "couponbox-b7a3d.firebaseapp.com",
