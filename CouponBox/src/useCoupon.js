@@ -10,9 +10,12 @@ import React, { Component,useState } from 'react';
 import { StyleSheet, View, Text, Button, Dimensions, ScrollView, StatusBar, Image, ImageBackground } from 'react-native';
 import { event } from 'react-native-reanimated';
 
-
 class UseCouponScreen extends Component{
+  state = {
+    sliderState: {currentPage: 0}
+  }
   render () {
+    //스탬프 개수 보관하는 배열
     const stamps = [
       { 'CafeName': "default1", 'CafeID': "a1234", 'number' : 4},
       { 'CafeName': "default2", 'CafeID': "a1234", 'number' : 6},
@@ -20,8 +23,12 @@ class UseCouponScreen extends Component{
       { 'CafeName': "default4", 'CafeID': "a1234", 'number' : 8},
       { 'CafeName': "default5", 'CafeID': "a1234", 'number' : 9},
     ]
+
+    //파이어베이스 db를 인자로 받아오는 부분
     const {params} = this.props.route;
     const db = params ? params.db : null;
+
+    //db의 데이터 처리 부분
     const handleClick = () => {
       db.collection('test')
       .doc('User')
@@ -40,23 +47,26 @@ class UseCouponScreen extends Component{
       });
     };
 
-    const sliderState = {currentPage: 0};    
+    // 스탬프함 슬라이드 부분
     const { width, height } = Dimensions.get('window');
 
     const setSliderPage = (event: any) => {
-      const { currentPage } = sliderState;
+      const { currentPage } = this.state.sliderState;
       const { x } = event.nativeEvent.contentOffset;
-      const indexOfNextScreen = Math.floor(x/width);
+      const indexOfNextScreen = Math.floor((x+1)/width);
       if(indexOfNextScreen !== currentPage){
         this.setState({
-          ...sliderState,
-          currentPage: indexOfNextScreen,
-        });
+          sliderState: {
+            ...this.state.sliderState,
+            currentPage: indexOfNextScreen,
+          }
+        })
       }
     };
 
-    const { currentPage: pageIndex } = sliderState;
+    const { currentPage: pageIndex } = this.state.sliderState;
 
+    //스탬프에 사용할 이미지 로드
     const stamp_bg_uri = "https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2Fbg_example.png?alt=media&token=9e0b055a-222f-41f8-bcde-2ad88b63ed97";
     const stamp_img_uri = "https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2F%EA%B7%B8%EB%A6%BC3.png?alt=media&token=19ad8f65-8f6a-432c-8e19-64214cafba3d";
 
@@ -125,6 +135,7 @@ class UseCouponScreen extends Component{
       <View style={styles.paginationWrapper}>
         {Array.from(Array(5).keys()).map((key, index) => (
           <View style={[styles.paginationDots, {opacity:pageIndex === index ? 1 : 0.2 }]} key={index} />
+
         ))}
       </View>
       </>

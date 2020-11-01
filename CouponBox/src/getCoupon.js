@@ -14,6 +14,8 @@ import QRCode from 'react-native-qrcode-svg';
 class GetCouponScreen extends Component{
 
   render () {
+    const userUID = "abcdef";
+
     return (
       <View style={{
         flex: 1,
@@ -22,7 +24,7 @@ class GetCouponScreen extends Component{
     }}>
         <Text>Get Coupon</Text>
         <QRCode
-          value="aa"
+          value={userUID}
           />
       </View>
     );
