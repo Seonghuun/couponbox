@@ -21,7 +21,7 @@ class UseCouponScreen extends Component{
       { CafeName: "default1", CafeID: "a1111", number : 4},
       { CafeName: "default2", CafeID: "a1222", number : 2},
       { CafeName: "default3", CafeID: "a1333", number : 3},
-      { CafeName: "default4", CafeID: "a1444", number : 4},
+      { CafeName: "default4", CafeID: "a1444", number : 7},
       { CafeName: "default5", CafeID: "a1555", number : 10},
     ]
 
