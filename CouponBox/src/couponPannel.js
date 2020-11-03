@@ -8,6 +8,7 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { View, Text, Image, ImageBackground } from 'react-native';
+import { floor } from 'react-native-reanimated';
 
 class CouponPannel extends Component{
   render () {
@@ -31,12 +32,12 @@ class CouponPannel extends Component{
           {[...Array(couponData.stampNum)].map((n, index) => (
             <Image
             source = {{uri: stamp_img_uri}}
-            style={{width: 80, height:80, top:30, left:40}}
+            style={{position: 'absolute', width: 80, height:80, top:30+Math.floor(index/2)*87, left:40+130*(index%2)}}
             />
+            
           ))}
         
         </ImageBackground>
-
       </View>
     );
   }
