@@ -13,7 +13,7 @@ import CouponPannel from './couponPannel.js';
 
 class UseCouponScreen extends Component{
   state = {
-    sliderState: {currentPage: 0}
+    sliderState: {currentPage: 0},
   }
   render () {
     //스탬프 개수 보관하는 배열
@@ -24,12 +24,34 @@ class UseCouponScreen extends Component{
       { CafeName: "default4", CafeID: "a1444", number : 7},
       { CafeName: "default5", CafeID: "a1555", number : 10},
     ]
+    
 
     //파이어베이스 db를 인자로 받아오는 부분
     const {params} = this.props.route;
     const db = params ? params.db : null;
 
+    //유저 데이터
+    const UserUID = 'User1'
+
     //db의 데이터 처리 부분
+
+    let stamps2 =
+      db.collection('test')
+      .doc('User')
+      .collection('UserList')
+      .doc(UserUID)
+      .collection('Stamps');
+    const allStamps = stamps2.get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          console.log(doc.id, '=>', doc.data());
+          
+        });
+      })
+      .catch(err => {
+        console.log('Error getting documents', err);
+      })
+    
     const handleClick = () => {
       db.collection('test')
       .doc('User')
@@ -48,7 +70,7 @@ class UseCouponScreen extends Component{
       });
     };
 
-    // 스탬프함 슬라이드 부분
+    // 쿠폰함 슬라이드 부분
     const { width, height } = Dimensions.get('window');
 
     const setSliderPage = (event: any) => {
@@ -83,35 +105,9 @@ class UseCouponScreen extends Component{
           setSliderPage(event);
         }}
       >
-        <View style={{ width, height, alignItems:'center'}}>
-          <Text>카페 이름 : {stamps[0].CafeName}</Text>
-          <Text>쿠폰 갯수 : {stamps[0].number}</Text>
-          <Text/>
-          <ImageBackground
-            source = {{uri: stamp_bg_uri }}
-            style={{width: 300, height:400}}
-          >
-          <Text/>
-          <Image
-            source = {{uri: stamp_img_uri}}
-            style={{width: 80, height:80, top:10, left:40}}
-          />
-          <Image
-            source = {{uri: stamp_img_uri}}
-            style={{width: 80, height:80, top:-70, left:170}}
-          />
-          <Image
-            source = {{uri: stamp_img_uri}}
-            style={{width: 80, height:80, top:-60, left:40}}
-          />
-          <Image
-            source = {{uri: stamp_img_uri}}
-            style={{width: 80, height:80, top:-140, left:170}}
-          />
-          </ImageBackground>
-          <Button
-            title="값 받기"
-            onPress={()=>{handleClick()}}
+        <View style={{ width, height }}>
+        <CouponPannel 
+          param = {{cafeName: stamps[0].CafeName, stampNum: stamps[0].number}}
           />
         </View>
         <View style={{ width, height }}>
