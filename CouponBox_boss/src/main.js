@@ -10,8 +10,8 @@ import 'react-native-gesture-handler';
 import {ButtonGroup} from 'react-native-elements';
 import React, {Component} from 'react'; 
 import { Image, View, Text, FlatList, Button } from 'react-native';
-import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
+
+import {auth, firestore} from './firebase';
 
 
 class Main extends Component {
@@ -29,7 +29,7 @@ constructor(props) {
 }
 
 getUid() {
-    auth().onAuthStateChanged(user => {
+    auth.onAuthStateChanged(user => {
         this.setState({uid:user.uid});
         console.log(this.state.uid);
         
@@ -38,7 +38,7 @@ getUid() {
 getcafeLists() {
   
     const {cafeInfo, cafeList } = this.state;
-    firestore().collection('test').doc('Cafe').collection('CafeList').get().
+    firestore.collection('test').doc('Cafe').collection('CafeList').get().
     then(querySnapshot=>{
         // console.log('Total cafes: ', querySnapshot.size);
         cafeInfo.splice(0, cafeInfo.length);       //배열 초기화 

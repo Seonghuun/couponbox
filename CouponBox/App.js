@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import 'react-native-gesture-handler';
 import React, {Component} from 'react'; 
 import { Image, View, Text } from 'react-native';
@@ -19,8 +11,12 @@ import LoginScreen from './src/login';
 import SignupScreen from './src/signup';
 import CafeDataScreen from './src/cafedata';
 
+
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+
 
 HomeStack = () => {
   return (
@@ -84,9 +80,9 @@ const TabBarIcon = (focused, name) => {
 class App extends Component {
   
   render () {
+    
     return (
-      
-     
+           
       <NavigationContainer>
         <Stack.Navigator >
           

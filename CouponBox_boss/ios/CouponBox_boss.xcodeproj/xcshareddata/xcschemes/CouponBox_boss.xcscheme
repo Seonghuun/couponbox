@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "CouponBox_boss.app"
-               BlueprintName = "CouponBox_boss"
-               ReferencedContainer = "container:CouponBox_boss.xcodeproj">
+               BuildableName = "couponbox_boss.app"
+               BlueprintName = "couponbox_boss"
+               ReferencedContainer = "container:couponbox_boss.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "CouponBox_bossTests.xctest"
-               BlueprintName = "CouponBox_bossTests"
-               ReferencedContainer = "container:CouponBox_boss.xcodeproj">
+               BuildableName = "couponbox_bossTests.xctest"
+               BlueprintName = "couponbox_bossTests"
+               ReferencedContainer = "container:couponbox_boss.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "CouponBox_bossTests.xctest"
-               BlueprintName = "CouponBox_bossTests"
-               ReferencedContainer = "container:CouponBox_boss.xcodeproj">
+               BuildableName = "couponbox_bossTests.xctest"
+               BlueprintName = "couponbox_bossTests"
+               ReferencedContainer = "container:couponbox_boss.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "CouponBox_boss.app"
-            BlueprintName = "CouponBox_boss"
-            ReferencedContainer = "container:CouponBox_boss.xcodeproj">
+            BuildableName = "couponbox_boss.app"
+            BlueprintName = "couponbox_boss"
+            ReferencedContainer = "container:couponbox_boss.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "CouponBox_boss.app"
-            BlueprintName = "CouponBox_boss"
-            ReferencedContainer = "container:CouponBox_boss.xcodeproj">
+            BuildableName = "couponbox_boss.app"
+            BlueprintName = "couponbox_boss"
+            ReferencedContainer = "container:couponbox_boss.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "CouponBox_boss.app"
-            BlueprintName = "CouponBox_boss"
-            ReferencedContainer = "container:CouponBox_boss.xcodeproj">
+            BuildableName = "couponbox_boss.app"
+            BlueprintName = "couponbox_boss"
+            ReferencedContainer = "container:couponbox_boss.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

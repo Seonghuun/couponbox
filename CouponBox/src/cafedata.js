@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Button, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import auth from "@react-native-firebase/auth"
-import firestore from "@react-native-firebase/firestore";
-import storage from '@react-native-firebase/storage';
+
 import logo from '../assets/images/logo.png';
 
 class CafeDataScreen extends Component {

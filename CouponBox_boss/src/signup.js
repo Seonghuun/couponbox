@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import auth from "@react-native-firebase/auth"
-import firestore from "@react-native-firebase/firestore";
+
+import {auth, firestore} from './firebase';
 
 
 class SignupScreen extends Component {
@@ -17,7 +17,7 @@ class SignupScreen extends Component {
 
     }
     addUser() {
-        firestore().
+        firestore.
                     collection('test').
                     doc('User').collection('UserList').doc(this.state.uid).
                     set({
@@ -32,11 +32,11 @@ class SignupScreen extends Component {
     }
 
     signup() {
-        auth()
+        auth
             .createUserWithEmailAndPassword(this.state.email, this.state.pw)
             .then(() => {
                 console.log('User account created & signed in!');
-                auth().onAuthStateChanged(user => {
+                auth.onAuthStateChanged(user => {
                     this.setState({uid:user.uid});
                     console.log('load success');
                     console.log(this.state.uid);

@@ -3,9 +3,9 @@ import 'react-native-gesture-handler';
 import React, {Component} from 'react'; // 리액트라는 모듈에서 컴포넌트 클래스 임포트
 import { TextInput, View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import Logo from '../assets/images/logo.png';
-import auth from "@react-native-firebase/auth"
 
-const fbAuth = auth();
+import {auth} from './firebase';
+
 
 
 class LoginScreen extends Component { //컴포넌트 상속하는 앱
@@ -19,7 +19,7 @@ class LoginScreen extends Component { //컴포넌트 상속하는 앱
   login() {
     // this.setState({loading: true, message: ""});
     
-    fbAuth
+    auth
     .signInWithEmailAndPassword(this.state.idInput, this.state.pwInput)
     .then(() => {
       alert('login success');

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import auth from "@react-native-firebase/auth";
-import firestore from "@react-native-firebase/firestore";
+import {auth, firestore} from './firebase';
 
 
 class TabUserScreen extends Component {
@@ -13,10 +12,10 @@ class TabUserScreen extends Component {
     }
     
     checkLogin() {
-        auth().onAuthStateChanged(user => {
+        auth.onAuthStateChanged(user => {
             this.setState({myUID:user.uid});
             this.setState({myEmail:user.email});
-            firestore().collection('test').doc('User').collection('UserList').doc(user.uid)
+            firestore.collection('test').doc('User').collection('UserList').doc(user.uid)
             .onSnapshot(dss=>{
                 this.setState({myName: dss.data().name})
                 this.setState({myNum: dss.data().phonenum})
