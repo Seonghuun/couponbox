@@ -42,7 +42,8 @@ getcafeLists() {
     const {cafeInfo, cafeList } = this.state;
     firestore().collection('cafelist').get().
     then(querySnapshot=>{
-        // console.log('Total cafes: ', querySnapshot.size);
+        console.log('Total cafes: ', querySnapshot.size);
+        cafeList.splice(0, cafeList.length);  
         cafeInfo.splice(0, cafeInfo.length);       //배열 초기화 
         querySnapshot.forEach(documentSnapshot => {
           if (documentSnapshot.data().owner == this.state.uid){
@@ -54,18 +55,20 @@ getcafeLists() {
             
         })
         
-        console.log(this.state.cafeInfo);
+        console.log(this.state.cafeList);
         this.setState({updated : 'true'});
         
     })
 }
 getImage(idx) {
   // const {imageUrl} = this.state;
-  let imageRef = storage().ref('cafeImages/'+this.state.cafeList[idx]);
-  
+  console.log(idx);
+  // 로고 불러오기
+  let imageRef = storage().ref('cafeImages/'+this.state.cafeList[idx]+'/1');
+
   imageRef.getDownloadURL()
   .then((url) => {
-      // console.log(url);
+      console.log(url);
       console.log('navigate to cafedata');
       this.props.navigation.navigate('Detail', {
           cafeId: this.state.cafeList[idx],
@@ -86,7 +89,7 @@ getImage(idx) {
       })
   });
   
-  // console.log(this.state.imageUrl);
+  console.log(this.state.imageUrl);
   
 }
 

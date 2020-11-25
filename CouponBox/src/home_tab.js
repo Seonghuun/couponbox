@@ -47,7 +47,8 @@ class TabHomeScreen extends Component {
     // 카페 이미지 불러오고 다음화면으로 이동
     getImage(idx) {
         // const {imageUrl} = this.state;
-        let imageRef = storage().ref('cafeImages/'+this.state.cafeList[idx]);
+        // 일단 로고만 불러옴
+        let imageRef = storage().ref('cafeImages/'+this.state.cafeList[idx]+'/1');
         
         imageRef.getDownloadURL()
         .then((url) => {

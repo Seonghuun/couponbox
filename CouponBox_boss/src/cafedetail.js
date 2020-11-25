@@ -26,10 +26,15 @@ class CafeDetailScreen extends Component {
     }
 
     uploadImage(id, path) {
-        const reference = storage().ref('cafeImages/'+id);
-        reference.putFile(path).then((snapshot)=>{
-            console.log('success')
+        let imageRef = storage().ref('cafeImages/'+id);
+        imageRef.listAll().then((result)=>{
+            const num = result._items.length;
+            const reference = storage().ref('cafeImages/'+id+'/'+num);
+            reference.putFile(path).then((snapshot)=>{
+                console.log('upload success')
+            })
         })
+        
 
     }
     
@@ -39,13 +44,13 @@ class CafeDetailScreen extends Component {
         const {params} = this.props.route;
         const cafeId = params ? params.cafeId : null;
         const data = params ? params.data : null;
-        const url = params ? params.url : null;
-        console.log(cafeId);
+        const url = params ? params.image : null;
+        // console.log(url);
         return (
             <View style={styles.mainView}>
                 <Image
-                    source={{uri:this.state.avatar}}
-                    style = {styles.avatar}/>
+                    source={{uri:this.state.avatar? this.state.avatar : url}}
+                    style={styles.avatar}/>
                 <Text style={{fontSize:20, marginBottom:20}}>
                     {data.name}
                 </Text>

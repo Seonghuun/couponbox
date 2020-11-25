@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import auth from "@react-native-firebase/auth"
 import firestore from "@react-native-firebase/firestore";
+import storage from "@react-native-firebase/storage";
+import noimage from '../assets/images/noimage.png';
 
 
 class RegisterCafeSceen extends Component {
@@ -22,6 +24,7 @@ class RegisterCafeSceen extends Component {
                 var size = querySnapshot.size+1;
                 console.log('Total cafes: ', querySnapshot.size);
                 console.log(size);
+                this.uploadImage(size.toString());
                 firestore().
                     collection('cafelist').doc('cafe' + size.toString()).
                     set({
@@ -40,6 +43,13 @@ class RegisterCafeSceen extends Component {
                     });
             });
         
+    }
+    uploadImage(id) {
+        const reference = storage().ref('cafeImages/cafe'+id+'/create');
+        reference.putString('create').then((snapshot)=>{
+            console.log('cafeImages/cafe'+id+'/noimage')
+        })
+
     }
 
 
