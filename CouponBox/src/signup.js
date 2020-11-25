@@ -18,8 +18,7 @@ class SignupScreen extends Component {
     }
     addUser() {
         firestore().
-                    collection('test').
-                    doc('User').collection('UserList').doc(this.state.uid).
+                    collection('userlist').doc(this.state.uid).
                     set({
                         email : this.state.email,
                         name : this.state.name,
@@ -37,12 +36,15 @@ class SignupScreen extends Component {
             .then(() => {
                 console.log('User account created & signed in!');
                 auth().onAuthStateChanged(user => {
-                    this.setState({uid:user.uid});
-                    console.log('load success');
-                    console.log(this.state.uid);
-                    this.addUser();
-                    this.props.navigation.navigate('Main');
-                    console.log('navigate');
+                    if(user!=null){
+                        this.setState({uid:user.uid});
+                        console.log('load success');
+                        console.log('signup');
+                        this.addUser();
+                        this.props.navigation.navigate('Main');
+                        console.log('navigate');
+                    }
+                    
                 })
                 
             })

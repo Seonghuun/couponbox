@@ -27,13 +27,13 @@ class CafeDataScreen extends Component {
                     
                 />
                 <Text style={styles.titleText}>
-                    {data.Name}
+                    {data.name}
                 </Text>
                 <Text style={styles.baseText}>
-                    {data.Address}
+                    {data.address}
                 </Text>
                 <Text style={styles.baseText}>
-                    전화번호: {data.Tel}
+                    전화번호: {data.tel}
                 </Text>
                 <Text style={styles.baseText}>
                     Open: 08:00

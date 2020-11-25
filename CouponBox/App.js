@@ -15,6 +15,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabUserScreen from './src/user_tab';
 import TabHomeScreen from './src/home_tab';
 import TabMapScreen from './src/map_tab';
+import TabCouponScreen from './src/coupon_tab';
 import LoginScreen from './src/login';
 import SignupScreen from './src/signup';
 import CafeDataScreen from './src/cafedata';
@@ -31,14 +32,16 @@ HomeStack = () => {
   )
 }
 
-MyPage = () => {
+// 탭 스크린
+MainPage = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
       tabBarOptions={{
-        activeBackgroundColor: '#E6E6E6',
-        activeTintColor: '#fff',
-        inactiveTintColor: '#fff',
+        
+        // activeBackgroundColor: '#E6E6E6',
+        activeTintColor: 'black',
+        inactiveTintColor: 'black',
         style: {
           backgroundColor: '#fff'
         }
@@ -53,21 +56,25 @@ MyPage = () => {
       <Tab.Screen name="Home" component={HomeStack}/>
       <Tab.Screen name="User" component={TabUserScreen}/>
       <Tab.Screen name="Map" component={TabMapScreen}/>
+      <Tab.Screen name="Coupon" component={TabCouponScreen}/>
       
 
     </Tab.Navigator>
   )
 }
 
+// 탭바 아이콘 정의
 const TabBarIcon = (focused, name) => {
   let iconImagePath;
 
   if (name==='Home') {
-      iconImagePath = require('./assets/images/home.png')
+      iconImagePath = focused? require('./assets/images/home.png') : require('./assets/images/home_unfocused.png')
   } else if (name==='User'){
-      iconImagePath = require('./assets/images/user.png')
+      iconImagePath = focused? require('./assets/images/user.png') : require('./assets/images/user_unfocused.png')
   } else if (name==='Map'){
-      iconImagePath = require('./assets/images/map.png')
+      iconImagePath = focused? require('./assets/images/map.png') : require('./assets/images/map_unfocused.png')
+  } else if (name==='Coupon'){
+    iconImagePath = focused? require('./assets/images/ticket.png') : require('./assets/images/ticket_unfocused.png')
 }
 
   return (
@@ -92,7 +99,7 @@ class App extends Component {
           
           <Stack.Screen name = 'Login' component = {LoginScreen} options={{headerShown: false}}/>
           <Stack.Screen name = 'Signup' component = {SignupScreen} options={{headerShown: false}}/>
-          <Stack.Screen name = 'Main' component = {MyPage} options={{headerShown: false}}/>
+          <Stack.Screen name = 'Main' component = {MainPage} options={{headerShown: false}}/>
           
         </Stack.Navigator>
         

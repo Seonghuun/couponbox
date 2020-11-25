@@ -17,21 +17,22 @@ class RegisterCafeSceen extends Component {
     }
     addCafe(id) {
         
-        firestore().collection('test').doc('Cafe').collection('CafeList').get().
+        firestore().collection('cafelist').get().
             then(querySnapshot=>{
                 var size = querySnapshot.size+1;
                 console.log('Total cafes: ', querySnapshot.size);
                 console.log(size);
                 firestore().
-                    collection('test').
-                    doc('Cafe').collection('CafeList').doc('Cafe' + size.toString()).
+                    collection('cafelist').doc('cafe' + size.toString()).
                     set({
-                        Name : this.state.caffe_name,
-                        Manager : this.state.manager,
-                        Address : this.state.address,
-                        Tel : this.state.tel,
-                        RegisterDate : new Date(),
-                        Owner: id
+                        name : this.state.caffe_name,
+                        manager : this.state.manager,
+                        address : this.state.address,
+                        tel : this.state.tel,
+                        registerDate : new Date(),
+                        owner: id,
+                        latitude: 37.61081,
+                        logitude: 126.99661
                         
                     })
                     .then(() => {

@@ -12,8 +12,7 @@ class LoginScreen extends Component { //컴포넌트 상속하는 앱
   state = {
     idInput: '',
     pwInput: '',
-    loading: false,
-    message: ""
+
   } 
 
   login() {
@@ -29,6 +28,17 @@ class LoginScreen extends Component { //컴포넌트 상속하는 앱
     .catch(error=> {
       alert('login fail');
     });
+  }
+
+  componentDidMount() {
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      this.setState({idInput:''});
+      this.setState({pwInput:''});
+    });
+  }
+  
+  componentWillUnmount() {
+    this._unsubscribe();
   }
   
 

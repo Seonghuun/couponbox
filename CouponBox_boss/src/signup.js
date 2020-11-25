@@ -18,8 +18,7 @@ class SignupScreen extends Component {
     }
     addUser() {
         firestore().
-                    collection('test').
-                    doc('User').collection('UserList').doc(this.state.uid).
+                    collection('userlist').doc(this.state.uid).
                     set({
                         email : this.state.email,
                         name : this.state.name,

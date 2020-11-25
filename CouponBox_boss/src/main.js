@@ -40,12 +40,12 @@ getUid() {
 getcafeLists() {
   
     const {cafeInfo, cafeList } = this.state;
-    firestore().collection('test').doc('Cafe').collection('CafeList').get().
+    firestore().collection('cafelist').get().
     then(querySnapshot=>{
         // console.log('Total cafes: ', querySnapshot.size);
         cafeInfo.splice(0, cafeInfo.length);       //배열 초기화 
         querySnapshot.forEach(documentSnapshot => {
-          if (documentSnapshot.data().Owner == this.state.uid){
+          if (documentSnapshot.data().owner == this.state.uid){
             cafeList.push(documentSnapshot.id);
             cafeInfo.push(documentSnapshot.data());
           }
@@ -74,7 +74,17 @@ getImage(idx) {
           image: url,
           
       })
-  }).catch((e)=>console.log(e));
+  }).catch((e)=>{
+    console.log(e)
+    console.log('navigate to cafedata');
+      this.props.navigation.navigate('Detail', {
+          cafeId: this.state.cafeList[idx],
+          data: this.state.cafeInfo[idx],
+          uid: this.state.uid,
+          
+          
+      })
+  });
   
   // console.log(this.state.imageUrl);
   
@@ -100,7 +110,7 @@ componentWillUnmount() {
           this.state.cafeInfo.map((item, idx)=>(
             <Button
               key={idx}
-              title={item.Name}
+              title={item.name}
               onPress={()=>{
                 this.getImage(idx);
               //   this.props.navigation.navigate('Detail', {

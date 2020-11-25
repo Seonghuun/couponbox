@@ -11,20 +11,33 @@ class TabUserScreen extends Component {
         myName: "",
         myNum: ""
     }
-    
+    // 로그인 상태 체크하고 유저 정보 state에 저장
     checkLogin() {
         auth().onAuthStateChanged(user => {
-            this.setState({myUID:user.uid});
-            this.setState({myEmail:user.email});
-            firestore().collection('test').doc('User').collection('UserList').doc(user.uid)
-            .onSnapshot(dss=>{
-                this.setState({myName: dss.data().name})
-                this.setState({myNum: dss.data().phonenum})
-            })
-            
-        })
+            if(user!=null){
+                console.log('usertab');
+                this.setState({myUID:user.uid});
+                this.setState({myEmail:user.email});
+                firestore().collection('userlist').doc(user.uid)
+                .onSnapshot(dss=>{
+                    this.setState({myName: dss.data().name})
+                    this.setState({myNum: dss.data().phonenum})
+                })
+            }
+            // 로그아웃 했을때
+            else{
+                console.log('usertab check again');
+            }          
+        })        
     }
-         
+    // 로그아웃
+    signOut() {
+        auth().signOut().
+        then(()=> {
+            console.log('User signed out');
+            this.props.navigation.navigate('Login'); 
+        })       
+    }
     
     constructor(props) {
         super(props);
@@ -57,6 +70,13 @@ class TabUserScreen extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.BtnTheme}>
                         <Text>프로필 편집</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.BtnTheme_2}
+                        onPress={()=>{
+                            this.signOut();                           
+                          }}
+                    >
+                        <Text style={{color:'blue'}}>로그아웃</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -100,7 +120,17 @@ const styles = StyleSheet.create({
       justifyContent:"center",
       marginTop:15,
       marginBottom:10
-    }
+    },
+    BtnTheme_2:{
+        width:"90%",
+        backgroundColor:"#F2F2F2",
+        borderRadius:25,
+        height:50,
+        alignItems:"center",
+        justifyContent:"center",
+        marginTop:15,
+        marginBottom:10
+      }
       
   })
 

@@ -16,31 +16,35 @@ class TabHomeScreen extends Component {
         imageUrl: ''
     };
  
+    // 유저 uid 불러와서 저장
     getUid() {
         auth().onAuthStateChanged(user => {
-            this.setState({uid:user.uid});
-            console.log(this.state.uid);
-            
+            if(user!=null){
+                console.log('hometab');
+                this.setState({uid:user.uid});                
+            }         
         })
     }
+
+    // 카페 리스트 불러와서 배열에 저장
     getcafeLists() {
         const {cafeInfo, cafeList } = this.state;
-    firestore().collection('test').doc('Cafe').collection('CafeList').get().
-    then(querySnapshot=>{
-        console.log('Total cafes: ', querySnapshot.size);
-        cafeInfo.splice(0, cafeInfo.length);       
-        querySnapshot.forEach(documentSnapshot => {
+        firestore().collection('cafelist').get().
+        then(querySnapshot=>{
+            console.log('Total cafes: ', querySnapshot.size);
+            cafeInfo.splice(0, cafeInfo.length);       
+            querySnapshot.forEach(documentSnapshot => {
+                // 카페 아이디 (cafe1)
+                cafeList.push(documentSnapshot.id);
+                // 카페 데이터 (필드)
+                cafeInfo.push(documentSnapshot.data());
             
-            cafeList.push(documentSnapshot.id);
-            cafeInfo.push(documentSnapshot.data());
-            
+            })
+            this.setState({updated : 'true'});
         })
-        console.log(this.state.cafeList);        
-        console.log(this.state.cafeInfo);
-        this.setState({updated : 'true'});
-        
-    })
     }
+
+    // 카페 이미지 불러오고 다음화면으로 이동
     getImage(idx) {
         // const {imageUrl} = this.state;
         let imageRef = storage().ref('cafeImages/'+this.state.cafeList[idx]);
@@ -56,10 +60,14 @@ class TabHomeScreen extends Component {
                 image: url,
                 
             })
-        }).catch((e)=>console.log(e));
-        
-        // console.log(this.state.imageUrl);
-        
+        }).catch((e)=>{
+            console.log(e)
+            this.props.navigation.navigate('Home2', {
+                cafeId: this.state.cafeList[idx],
+                data: this.state.cafeInfo[idx],
+                uid: this.state.uid,
+            })
+        });
     }
 
     constructor(props) {
@@ -68,60 +76,43 @@ class TabHomeScreen extends Component {
         this.getUid();
       }
 
-
-        
     render () {
         
         return (
-            // <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollView}>
-                <TouchableOpacity>
-                    <Image
-                    style={{height:80, width:'100%', alignItems:'center'}}
-                    source = {require('../assets/images/searchBar.png')}
-                    />
+                    <TouchableOpacity>
+                        <Image
+                        style={{height:80, width:'100%', alignItems:'center'}}
+                        source = {require('../assets/images/searchBar.png')}
+                        />
+                    </TouchableOpacity>
+                    {
+                        this.state.cafeInfo.map((item, idx)=>(
+                        <TouchableOpacity
+                        style = {styles.caffeBtn}
+                        key={idx}
+                        onPress={()=>{
+                            this.getImage(idx);
+                        }}
+                        >
+                            <Text>{item.name}</Text>
+                        </TouchableOpacity>
+                        ))
+                    }
+                </ScrollView>    
 
-                </TouchableOpacity>
-                {
-          this.state.cafeInfo.map((item, idx)=>(
-            
-            <TouchableOpacity
-            style = {styles.caffeBtn}
-            key={idx}
-             onPress={()=>{
-                this.getImage(idx);
-            }}
-        >
-          <Text>{item.Name}</Text>
-        </TouchableOpacity>
-            
-          ))
-        }
-        </ScrollView>    
-            
-                
-               
-            
-
-            //  </SafeAreaView>
-            
-            
-            
-            
         )
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
         alignItems: 'center'
         
     },
     scrollView: {
         backgroundColor: 'white'
-        // alignItems: 'center'
-        // marginHorizontal: 50,
+
     },
     
     caffeBtn:{
@@ -131,7 +122,6 @@ const styles = StyleSheet.create({
       height:50,
       alignItems:"center",
       justifyContent:"center",
-    //   marginTop:10,
       marginBottom:10
     }
       

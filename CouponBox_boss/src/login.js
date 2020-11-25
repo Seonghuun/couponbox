@@ -5,9 +5,6 @@ import { TextInput, View, Text, StyleSheet, TouchableOpacity, Image} from 'react
 import Logo from '../assets/images/logo.png';
 import auth from "@react-native-firebase/auth"
 
-const fbAuth = auth();
-
-
 class LoginScreen extends Component { //컴포넌트 상속하는 앱
   state = {
     idInput: '',
@@ -19,7 +16,7 @@ class LoginScreen extends Component { //컴포넌트 상속하는 앱
   login() {
     // this.setState({loading: true, message: ""});
     
-    fbAuth
+    auth()
     .signInWithEmailAndPassword(this.state.idInput, this.state.pwInput)
     .then(() => {
       alert('login success');

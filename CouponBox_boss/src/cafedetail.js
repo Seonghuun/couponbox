@@ -47,7 +47,7 @@ class CafeDetailScreen extends Component {
                     source={{uri:this.state.avatar}}
                     style = {styles.avatar}/>
                 <Text style={{fontSize:20, marginBottom:20}}>
-                    {data.Name}
+                    {data.name}
                 </Text>
                 <TouchableOpacity
                     style={styles.loginBtn}
