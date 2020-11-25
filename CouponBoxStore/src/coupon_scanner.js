@@ -7,41 +7,78 @@
  */
 import 'react-native-gesture-handler';
 import React, { Component} from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import { Alert } from 'react-native';
+import { DefaultTheme } from '@react-navigation/native';
 
 
 class CouponScanScreen extends Component {
   state = {
-    scan: true
+    scan: true,
+    UserID: 'Default',
   };
-  onSuccess = (e) => {
-    this.setState(() => {
-      scan: false
-    })
-    console.log(this.state.scan)
-    alert(e.data)
-  }
+  
   render () {
+
+    //파이어베이스 db를 인자로 받아오는 부분
+    const {params} = this.props.route;
+    const db = params ? params.db : null;
+
+    
+    //const UserID = 'User1';
+    const CafeID = 'Cafe1';
+    
+    //qr스캐너가 읽었을 경우 처리하는 부분
+    const {scan, UserID} = this.state;
+    const onSuccess = (e) => {
+      this.setState({scan: false, UserID: e.data})
+      console.log(scan)
+      console.log(e.data)
+      addStamp(UserID)
+      Alert.alert(
+        '스탬프 발급',
+        UserID+'님의 스탬프 발급에 성공했습니다.',
+        [
+          {text: '확인', onPress: () => this.setState({scan: true})}
+        ]
+
+      )
+    }
+
+    //도장 개수 늘려주는 부분
+    //!!!도장이 없는 경우, 필드를 생성? 해줘야함
+    const addStamp = (UserID) => {
+      const CafeDoc = db.collection('test')
+      .doc('User')
+      .collection('UserList')
+      .doc(UserID)
+      .collection('Stamps')
+      .doc(CafeID);
+      CafeDoc.get()
+      .then(doc => {
+        const nowNum = doc.data().StampNumber + 1;
+        console.log(nowNum);
+        CafeDoc.update({StampNumber: nowNum});
+      })
+    }
+
     return (
       <>
-      { this.state.scan &&
-        <View style={styles.sectionContainer}>
-          
+        {scan &&
           <QRCodeScanner
-            reactivate={false} //일단 false로 해둠. 나중에 ok 누르면 재활성화 되도록 수정필요
+            reactivate={true}
             showMarker={true}
             ref={(node) => {this.scanner = node}}
-            onRead={this.onSuccess}
-
+            onRead={onSuccess}
+            
             topContent={
               <Text>
                 Scan your QRCode
               </Text>
             }
           />
-        </View>
-      }
+        }
       </>
     )
   }

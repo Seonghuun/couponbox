@@ -8,6 +8,7 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
+import firebase from 'firebase';
 import 'firebase/firestore';
 
 const firebaseConfig = {
@@ -39,7 +40,7 @@ class HomeScreen extends Component {
             <Button
                 title="QR Scanner"
                 onPress={()=>{
-                    this.props.navigation.navigate('CouponScan')
+                    this.props.navigation.navigate('CouponScan', {db})
                 }}
             />
         </View>

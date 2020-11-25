@@ -11,7 +11,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './src/home';
-import CouponScanScreen from './src/coupon_scanner'
+import CouponScanScreen from './src/coupon_scanner';
 
 const Stack = createStackNavigator();
 
