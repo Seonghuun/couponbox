@@ -14,11 +14,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface couponbox_bossTests : XCTestCase
+@interface CouponBox_bossTests : XCTestCase
 
 @end
 
-@implementation couponbox_bossTests
+@implementation CouponBox_bossTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {

@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "couponbox_boss";
+    return "CouponBox_boss";
   }
 }

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Button, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 import { SearchBar } from 'react-native-elements';
+import auth from "@react-native-firebase/auth"
+import firestore from "@react-native-firebase/firestore";
+import storage from '@react-native-firebase/storage';
 import searchImg from '../assets/images/searchBar.png'
-import {auth, firestore, storage} from './firebase';
 
 class TabHomeScreen extends Component {
     state = {
@@ -15,7 +17,7 @@ class TabHomeScreen extends Component {
     };
  
     getUid() {
-        auth.onAuthStateChanged(user => {
+        auth().onAuthStateChanged(user => {
             this.setState({uid:user.uid});
             console.log(this.state.uid);
             
@@ -23,7 +25,7 @@ class TabHomeScreen extends Component {
     }
     getcafeLists() {
         const {cafeInfo, cafeList } = this.state;
-    firestore.collection('test').doc('Cafe').collection('CafeList').get().
+    firestore().collection('test').doc('Cafe').collection('CafeList').get().
     then(querySnapshot=>{
         console.log('Total cafes: ', querySnapshot.size);
         cafeInfo.splice(0, cafeInfo.length);       
@@ -41,7 +43,7 @@ class TabHomeScreen extends Component {
     }
     getImage(idx) {
         // const {imageUrl} = this.state;
-        let imageRef = storage.ref('cafeImages/'+this.state.cafeList[idx]);
+        let imageRef = storage().ref('cafeImages/'+this.state.cafeList[idx]);
         
         imageRef.getDownloadURL()
         .then((url) => {

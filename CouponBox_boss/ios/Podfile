@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'couponbox_boss' do
-  # Pods for couponbox_boss
+target 'CouponBox_boss' do
+  # Pods for CouponBox_boss
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -34,7 +34,7 @@ target 'couponbox_boss' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  target 'couponbox_bossTests' do
+  target 'CouponBox_bossTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -42,10 +42,10 @@ target 'couponbox_boss' do
   use_native_modules!
 end
 
-target 'couponbox_boss-tvOS' do
-  # Pods for couponbox_boss-tvOS
+target 'CouponBox_boss-tvOS' do
+  # Pods for CouponBox_boss-tvOS
 
-  target 'couponbox_boss-tvOSTests' do
+  target 'CouponBox_boss-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

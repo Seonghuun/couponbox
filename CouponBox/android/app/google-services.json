@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "954319225728",
+    "firebase_url": "https://couponbox-b7a3d.firebaseio.com",
+    "project_id": "couponbox-b7a3d",
+    "storage_bucket": "couponbox-b7a3d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:954319225728:android:b670683cd9aa8d15d97765",
+        "android_client_info": {
+          "package_name": "com.couponbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "954319225728-qb8d3chcpct67kjjk2t5b49uhq4cr5og.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZa8ohFqBWr_Z6g_2it5z4YXkRKZGdlsg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "954319225728-qb8d3chcpct67kjjk2t5b49uhq4cr5og.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

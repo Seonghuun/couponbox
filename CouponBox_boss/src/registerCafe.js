@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-
-import {auth, firestore} from './firebase';
+import auth from "@react-native-firebase/auth"
+import firestore from "@react-native-firebase/firestore";
 
 
 class RegisterCafeSceen extends Component {
@@ -17,12 +17,12 @@ class RegisterCafeSceen extends Component {
     }
     addCafe(id) {
         
-        firestore.collection('test').doc('Cafe').collection('CafeList').get().
+        firestore().collection('test').doc('Cafe').collection('CafeList').get().
             then(querySnapshot=>{
                 var size = querySnapshot.size+1;
                 console.log('Total cafes: ', querySnapshot.size);
                 console.log(size);
-                firestore.
+                firestore().
                     collection('test').
                     doc('Cafe').collection('CafeList').doc('Cafe' + size.toString()).
                     set({

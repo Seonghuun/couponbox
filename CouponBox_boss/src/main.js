@@ -10,8 +10,10 @@ import 'react-native-gesture-handler';
 import {ButtonGroup} from 'react-native-elements';
 import React, {Component} from 'react'; 
 import { Image, View, Text, FlatList, Button } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+import storage from '@react-native-firebase/storage';
 
-import {auth, firestore} from './firebase';
 
 
 class Main extends Component {
@@ -29,7 +31,7 @@ constructor(props) {
 }
 
 getUid() {
-    auth.onAuthStateChanged(user => {
+    auth().onAuthStateChanged(user => {
         this.setState({uid:user.uid});
         console.log(this.state.uid);
         
@@ -38,7 +40,7 @@ getUid() {
 getcafeLists() {
   
     const {cafeInfo, cafeList } = this.state;
-    firestore.collection('test').doc('Cafe').collection('CafeList').get().
+    firestore().collection('test').doc('Cafe').collection('CafeList').get().
     then(querySnapshot=>{
         // console.log('Total cafes: ', querySnapshot.size);
         cafeInfo.splice(0, cafeInfo.length);       //배열 초기화 
@@ -57,6 +59,27 @@ getcafeLists() {
         
     })
 }
+getImage(idx) {
+  // const {imageUrl} = this.state;
+  let imageRef = storage().ref('cafeImages/'+this.state.cafeList[idx]);
+  
+  imageRef.getDownloadURL()
+  .then((url) => {
+      // console.log(url);
+      console.log('navigate to cafedata');
+      this.props.navigation.navigate('Detail', {
+          cafeId: this.state.cafeList[idx],
+          data: this.state.cafeInfo[idx],
+          uid: this.state.uid,
+          image: url,
+          
+      })
+  }).catch((e)=>console.log(e));
+  
+  // console.log(this.state.imageUrl);
+  
+}
+
 componentDidMount() {
   this._unsubscribe = this.props.navigation.addListener('focus', () => {
     this.getcafeLists(); 
@@ -79,11 +102,12 @@ componentWillUnmount() {
               key={idx}
               title={item.Name}
               onPress={()=>{
-                this.props.navigation.navigate('Detail', {
-                  cafeId: this.state.cafeList[idx],
-                  data: this.state.cafeInfo[idx],
+                this.getImage(idx);
+              //   this.props.navigation.navigate('Detail', {
+              //     cafeId: this.state.cafeList[idx],
+              //     data: this.state.cafeInfo[idx],
                   
-              })
+              // })
               }}
             />
           ))

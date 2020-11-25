@@ -1,9 +1,10 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
-
+import auth from "@react-native-firebase/auth"
+import firestore from "@react-native-firebase/firestore";
 import ImagePicker from 'react-native-image-picker';
-import {storage} from './firebase';
+import storage from '@react-native-firebase/storage';
 
 
 class CafeDetailScreen extends Component {
@@ -12,23 +13,23 @@ class CafeDetailScreen extends Component {
         avatar: ''
 
     }
-    
     addImage(id) {
-        ImagePicker.launchImageLibrary({}, response=>{
+        ImagePicker.launchImageLibrary({}, response=>{ // showImagePicker : 사진 찍거나, 사진첩에서 불러옴
+            console.log(response.path)
+            console.log(response.path.split('.')[1])
             this.setState({
-                avatar : response.uri
+                avatar: response.uri
             })
-            // this.uploadImage(id, response.path)
-            
+            this.uploadImage(id, response.path)
+            // this.uploadImage(id, response.uri);
         })
     }
 
     uploadImage(id, path) {
-        const reference = storage.ref('cafeImages/'+id);
-        reference.put(path).then((snapshot)=>{
+        const reference = storage().ref('cafeImages/'+id);
+        reference.putFile(path).then((snapshot)=>{
             console.log('success')
         })
-        
 
     }
     
@@ -38,7 +39,8 @@ class CafeDetailScreen extends Component {
         const {params} = this.props.route;
         const cafeId = params ? params.cafeId : null;
         const data = params ? params.data : null;
-        // console.log(cafeId);
+        const url = params ? params.url : null;
+        console.log(cafeId);
         return (
             <View style={styles.mainView}>
                 <Image
