@@ -4,6 +4,7 @@ import { View, Text, Button, PermissionsAndroid, TouchableOpacity } from 'react-
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import Modal from 'react-native-simple-modal';
+import firestore from "@react-native-firebase/firestore";
 
 /***************************** */
 /*  필수 사항
@@ -44,6 +45,7 @@ class TabMapScreen extends Component{
       latitude: 0,
       longitude: 0,
     },
+    cafeInfo: [],
     
     open: false,
   }
@@ -73,6 +75,23 @@ class TabMapScreen extends Component{
     console.log(region.latitude);
     console.log(region.longitude);
   }
+
+  getcafeLists() {
+    const {cafeInfo} = this.state;
+    firestore().collection('cafelist').get().
+    then(querySnapshot=>{
+        console.log('Total cafes: ', querySnapshot.size);
+        cafeInfo.splice(0, cafeInfo.length);       
+        querySnapshot.forEach(documentSnapshot => {
+            // 카페 아이디 (cafe1)
+            cafeList.push(documentSnapshot.id);
+            // 카페 데이터 (필드)
+            cafeInfo.push(documentSnapshot.data());
+        
+        })
+        this.setState({updated : 'true'});
+    })
+}
 
   componentDidMount() {
     requestLocationPermission();
