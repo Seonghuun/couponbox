@@ -32,7 +32,8 @@ Through the 'Coupon Box', which allows the coupons of 'neighborhood cafes' to be
 For the 'store owner', it is possible to reduce costs such as printing 'paper coupons' and managing coupons through its own system. 
 In addition, it is possible to expect a 'sales increase' effect by enhancing the revisitability of customers to cafes by transparently providing coupon accumulation details to customers.
    
-## 3. 시스템 구조 
+## 3. 시스템 구조
+<img height="400" width="800" src="./Img/struct.png"> 
 
 ## 4. 사용법 (점주)
 - 회원가입 및 로그인 
