@@ -30,7 +30,7 @@
       <!-- 이 파일은 되도록 git에 올리지 않도록 -->
       <meta-data
         android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyAlKslfpnRohoHZfp2Og86p9ZgIe_6IK7E"/>
+        android:value="${googleMapApiKey}"/>
 
     </application>
 
