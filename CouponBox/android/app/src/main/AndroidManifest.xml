@@ -3,6 +3,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- 위치정보 권한 받기 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
@@ -21,6 +25,13 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+      
+      <!-- 구글지도 사용을 위한 API 키 등록 -->
+      <!-- 이 파일은 되도록 git에 올리지 않도록-->
+      <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyAlKslfpnRohoHZfp2Og86p9ZgIe_6IK7E"/>
+
     </application>
 
 </manifest>

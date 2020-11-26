@@ -12,6 +12,8 @@ import { event } from 'react-native-reanimated';
 import CouponPannel from './couponPannel.js';
 import CompleteCouponPan from './completeCouponPan'
 
+
+
 class UseCouponScreen extends Component{
   state = {
     sliderState: {currentPage: 0},
@@ -20,7 +22,7 @@ class UseCouponScreen extends Component{
 
   componentDidMount() {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
-      alert("hello");
+      //alert("hello");
     });
   }
 
@@ -45,9 +47,13 @@ class UseCouponScreen extends Component{
     //파이어베이스 db를 인자로 받아오는 부분
     const {params} = this.props.route;
     const db = params ? params.db : null;
-
+    
     //유저 데이터
     const UserUID = 'User1'
+
+    const gotoUsingCoupon = () => {
+      this.props.navigation.navigate('UsingCoupon')
+    }
 
     //db의 데이터 처리 부분
     const getStamps = () => {
@@ -108,6 +114,7 @@ class UseCouponScreen extends Component{
           <View style={{ width, height }}>
           <CompleteCouponPan
             param = {{cafeName: coupons[index].CafeName, stampNum: coupons[index].number}}
+            goUsing = {gotoUsingCoupon}
           />
           </View>
         ))}

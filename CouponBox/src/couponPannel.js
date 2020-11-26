@@ -24,15 +24,14 @@ class CouponPannel extends Component{
         }}>
         <Text>카페 이름 : {couponData.cafeName}</Text>
         <Text>쿠폰 갯수 : {couponData.stampNum}</Text>
-        <Text/>
         <ImageBackground
           source = {{uri: stamp_bg_uri }}
-          style={{width: 300, height:500}}
+          style={{width: 270, height: 450}}
         >
           {[...Array(couponData.stampNum)].map((n, index) => (
             <Image
             source = {{uri: stamp_img_uri}}
-            style={{position: 'absolute', width: 80, height:80, top:26+Math.floor(index/2)*89, left:45+120*(index%2)}}
+            style={{position: 'absolute', width: 80, height:80, top:20+Math.floor(index/2)*80, left:35+110*(index%2)}}
             />
             
           ))}
