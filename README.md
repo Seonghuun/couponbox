@@ -32,12 +32,53 @@ Through the 'Coupon Box', which allows the coupons of 'neighborhood cafes' to be
 For the 'store owner', it is possible to reduce costs such as printing 'paper coupons' and managing coupons through its own system. 
 In addition, it is possible to expect a 'sales increase' effect by enhancing the revisitability of customers to cafes by transparently providing coupon accumulation details to customers.
    
+## 3. 시스템 구조 
+
+## 4. 사용법 (점주)
+- 회원가입 및 로그인 
+<div>
+<img height="350" width="200" src="./Img/main_cafe.png">  
+<img height="350" width="200" src="./Img/register.png">
+</div>
+
+- 카페 정보 등록
+<div>
+<img height="350" width="200" src="./Img/register_cafe1.png">  
+<img height="350" width="200" src="./Img/register_cafe2.png">
+</div>
+
+- 등록된 카페 관리 (도장 찍기 버튼 클릭 시 QR Scanner 실행)
+<img height="350" width="200" src="./Img/cafe_profile.png">
+
+
+
+## 5. 사용법 (고객)
+- 회원가입 및 로그인 
+<div>
+<img height="350" width="200" src="./Img/main_customer.png">  
+<img height="350" width="200" src="./Img/register.png">
+</div>
+
+- 고객 정보
+<img height="350" width="200" src="./Img/user_profile.png">
+
+- 카페 검색 (검색 / 현재 위치에 기반한 카페 정보 제공)
+<div>
+<img height="350" width="200" src="./Img/search.png">
+<img height="350" width="200" src="./Img/map.png">
+</div>
+
+- 카페 상세 페이지
+<img height="350" width="200" src="./Img/customer_cafe_info.png">
+
+- 도장 받기 및 쿠폰 사용
+<div>
+<img height="350" width="200" src="./Img/getcoupon.png">
+<img height="350" width="200" src="./Img/couponlist1.png">
+<img height="350" width="200" src="./Img/couponlist2.png">
+<img height="350" width="200" src="./Img/couponlist3.png">
+</div>
   
 
-## 3. 사용법 (점주)
-  
-- 
 
-## 3. 사용법 (고객)
-  
--
+
