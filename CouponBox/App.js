@@ -19,6 +19,9 @@ import TabCouponScreen from './src/coupon_tab';
 import LoginScreen from './src/login';
 import SignupScreen from './src/signup';
 import CafeDataScreen from './src/cafedata';
+import GetCouponScreen from './src/getCoupon';
+import CouponListScreen from './src/couponList';
+import UsableCouponScreen from './src/usableCoupon';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -28,6 +31,9 @@ HomeStack = () => {
     <Stack.Navigator>
       <Stack.Screen name = 'Home1' component = {TabHomeScreen} options={{headerShown: false}}/>
       <Stack.Screen name = 'Home2' component = {CafeDataScreen} options={{headerShown: false}}/>
+      <Stack.Screen name = 'GetCoupon' component = {GetCouponScreen} options={{headerShown: false}}/>
+      <Stack.Screen name = 'CouponList' component = {CouponListScreen} options={{headerShown: false}}/>
+      <Stack.Screen name = 'UsableCoupon' component = {UsableCouponScreen} options={{headerShown: false}}/>
     </Stack.Navigator>
   )
 }
@@ -37,6 +43,9 @@ MapStack = () => {
     <Stack.Navigator>
       <Stack.Screen name = 'Map1' component = {TabMapScreen} options={{headerShown: false}}/>
       <Stack.Screen name = 'Map2' component = {CafeDataScreen} options={{headerShown: false}}/>
+      <Stack.Screen name = 'GetCoupon' component = {GetCouponScreen} options={{headerShown: false}}/>
+      <Stack.Screen name = 'CouponList' component = {CouponListScreen} options={{headerShown: false}}/>
+      <Stack.Screen name = 'UsableCoupon' component = {UsableCouponScreen} options={{headerShown: false}}/>
     </Stack.Navigator>
   )
   

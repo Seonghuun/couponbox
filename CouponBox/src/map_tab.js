@@ -156,7 +156,7 @@ getImage(idx) {
                   {
                     this.getImage(index);
                     console.log('setstate');
-                    this.setState({ open: true, nowCafe: item, nowCafeIdx: index })
+                    this.setState({ open: true, nowCafe: item, nowCafeIdx: index+1 })
                     
                   } 
                   }
@@ -183,7 +183,7 @@ getImage(idx) {
                   onPress={()=>{
                     console.log('navigate to cafedata');
                     this.props.navigation.navigate('Map2', {
-                      cafeId: 'cafe'+ this.state.nowCafeIdx+1,
+                      cafeId: 'cafe'+ this.state.nowCafeIdx,
                       data: this.state.nowCafe,
                       image: this.state.imageUrl,
                       uid: this.state.uid,

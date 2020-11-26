@@ -7,6 +7,42 @@ import storage from '@react-native-firebase/storage';
 import logo from '../assets/images/logo.png';
 
 class CafeDataScreen extends Component {
+
+    getStamp(uid, cafeId) {
+        firestore().collection('userlist').doc(uid).collection('stamp').get().
+        then(querySnapshot=>{
+            console.log(querySnapshot.size); 
+            const tmp = new Object();    
+            querySnapshot.forEach(documentSnapshot => {
+                if (documentSnapshot.data().cafeId == cafeId){
+                    tmp.id = cafeId;
+                    tmp.name = documentSnapshot.data().cafeName;
+                    tmp.num = documentSnapshot.data().number;                    
+                }            
+            })
+            console.log(tmp);
+            const coupons = [];
+            const stamps = [];
+
+            if(tmp.num >= 10){
+                const cNum = Math.floor(tmp.num/10);
+                console.log(cNum);
+                const sNum = tmp.num%10;
+                for (var i =0; i< cNum; i++){
+                    coupons.push({CafeName:tmp.name, CafeID: tmp.id, number: 10});
+                }
+                stamps.push({CafeName:tmp.name, CafeID: tmp.id, number:sNum});
+            }
+            else{
+                stamps.push({CafeName:tmp.name, CafeID: tmp.id, number:tmp.num});
+            }
+
+            
+            this.props.navigation.navigate('CouponList', {uid:uid, data: tmp, coupons: coupons, stamps:stamps});
+            
+
+        })
+      }
         
     render () {
         const {params} = this.props.route;
@@ -14,7 +50,7 @@ class CafeDataScreen extends Component {
         const data = params ? params.data : null;
         const uid = params ? params.uid : null;
         const imageUrl = params ? params.image : null;
-        console.log(uid);
+        console.log(cafeId);
         
         
         return (
@@ -42,10 +78,18 @@ class CafeDataScreen extends Component {
                     Close: 24:00
                 </Text>
                 <View style={styles.btnView}>
-                <TouchableOpacity style = {styles.caffeBtn}>
+                <TouchableOpacity style = {styles.caffeBtn}
+                onPress={()=>{
+                    this.props.navigation.navigate('GetCoupon', {uid:uid});
+                }}
+                >
                     <Text>도장 받기</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style = {styles.caffeBtn}>
+                <TouchableOpacity style = {styles.caffeBtn}
+                onPress={()=>{
+                    this.getStamp(uid, cafeId);
+                }}
+                >
                     <Text>쿠폰 사용</Text>
                 </TouchableOpacity>
                 </View>
