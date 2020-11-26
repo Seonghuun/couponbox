@@ -48,8 +48,10 @@ In addition, it is possible to expect a 'sales increase' effect by enhancing the
 </div>
 
 - 등록된 카페 관리 (도장 찍기 버튼 클릭 시 QR Scanner 실행)
+<div>
 <img height="350" width="200" src="./Img/cafe_profile.png">
-
+  <img height="350" width="200" src="./Img/scan.png">
+</div>
 
 
 ## 5. 사용법 (고객)
