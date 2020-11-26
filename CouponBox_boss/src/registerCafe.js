@@ -1,11 +1,13 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Button } from 'react-native';
 import auth from "@react-native-firebase/auth"
 import firestore from "@react-native-firebase/firestore";
 import storage from "@react-native-firebase/storage";
 import noimage from '../assets/images/noimage.png';
+import Geocoder from 'react-native-geocoding';
 
+Geocoder.init("AIzaSyAlKslfpnRohoHZfp2Og86p9ZgIe_6IK7E", {language : "ko"});
 
 class RegisterCafeSceen extends Component {
 
@@ -14,11 +16,28 @@ class RegisterCafeSceen extends Component {
         tel :'',
         address : '',
         manager : '',
-        updated : ''
-
+        updated : '',
+        latitude : '',
+        longitude: '',
     }
+
+    //주소를 위도,경도로 변환해주는 함수
+    toGeocode (addr){
+        const {latitude, longitude} = this.state;
+        Geocoder.from(addr)
+          .then(json => {
+              var location = json.results[0].geometry.location;
+              console.log("toGeocode test : ",location);
+              this.setState({latitude: location.lat, longitude:location.lng});
+              console.log('after geocode',this.state);
+          })
+          .catch(error => console.warn(error));
+      }
+
     addCafe(id) {
-        
+        this.toGeocode (this.state.address);
+        this.state.latitude==='' ?
+        alert('잘못된 주소 입니다') :
         firestore().collection('cafelist').get().
             then(querySnapshot=>{
                 var size = querySnapshot.size+1;
@@ -34,8 +53,8 @@ class RegisterCafeSceen extends Component {
                         tel : this.state.tel,
                         registerDate : new Date(),
                         owner: id,
-                        latitude: 37.61081,
-                        longitude: 126.99661
+                        latitude: this.state.latitude,
+                        longitude: this.state.longitude,
                         
                     })
                     .then(() => {
@@ -56,6 +75,7 @@ class RegisterCafeSceen extends Component {
     render() {
         const {params} = this.props.route;
         const uid = params ? params.uid : null;
+
         // console.log(uid);
         return (
             <View style={styles.mainView}>
@@ -116,13 +136,13 @@ class RegisterCafeSceen extends Component {
                 <TouchableOpacity
                     style={styles.loginBtn}
                     onPress={()=>{
-                        this.addCafe(uid)
-                        this.props.navigation.navigate('Main');
+                        this.addCafe(uid);
+                        this.state.latitude==!'' && this.props.navigation.navigate('Main');
                         // this.setState({updated:"true"})
                     }}
                 >
                     <Text style={styles.loginText}>등록</Text>
-                </TouchableOpacity>  
+                </TouchableOpacity>
             </View>
         )
     }
