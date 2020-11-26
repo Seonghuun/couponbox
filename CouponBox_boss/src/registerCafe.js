@@ -7,6 +7,7 @@ import storage from "@react-native-firebase/storage";
 import noimage from '../assets/images/noimage.png';
 import Geocoder from 'react-native-geocoding';
 
+
 Geocoder.init("AIzaSyAlKslfpnRohoHZfp2Og86p9ZgIe_6IK7E", {language : "ko"});
 
 class RegisterCafeSceen extends Component {
