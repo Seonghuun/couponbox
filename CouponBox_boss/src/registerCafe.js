@@ -15,12 +15,25 @@ class RegisterCafeSceen extends Component {
     state = {
         caffe_name : '',
         tel :'',
-        address : '',
+        zonecode : '', //우편번호
+        address : '',  //도로명주소
+        address_d : '' , //상세주소
         manager : '',
         updated : '',
         latitude : '',
         longitude: '',
     }
+    
+
+    //다음 데이터 받음
+    getAddr (daum_data){
+        this.setState({
+            address: daum_data.address,
+            zonecode: daum_data.zonecode,
+        })
+        console.log('state ', this.state);
+    }
+
 
     //주소를 위도,경도로 변환해주는 함수
     toGeocode (addr){
@@ -37,7 +50,7 @@ class RegisterCafeSceen extends Component {
 
     addCafe(id) {
         this.toGeocode (this.state.address);
-        this.state.latitude==='' ?
+        this.state.address==='' ?
         alert('잘못된 주소 입니다') :
         firestore().collection('cafelist').get().
             then(querySnapshot=>{
@@ -56,10 +69,11 @@ class RegisterCafeSceen extends Component {
                         owner: id,
                         latitude: this.state.latitude,
                         longitude: this.state.longitude,
-                        
                     })
                     .then(() => {
                         console.log('Cafe added');
+                        alert('카페 추가가 완료되었습니다');
+                        this.props.navigation.navigate('Main');
                     });
             });
         
@@ -76,6 +90,13 @@ class RegisterCafeSceen extends Component {
     render() {
         const {params} = this.props.route;
         const uid = params ? params.uid : null;
+
+        //우편번호 설정
+        const setZonecode =(zcode)=>{
+            this.setState({
+                zonecode: zcode,
+            })
+        }
 
         // console.log(uid);
         return (
@@ -120,7 +141,26 @@ class RegisterCafeSceen extends Component {
                         editable={true}
                     />
                 </View>
-                
+                <View style={styles.inputView2}>
+                    <TextInput
+                        value={this.state.zonecode}
+                        style={styles.input}
+                        placeholder="우편번호" 
+                        placeholderTextColor="#003f5c"
+                        onChangeText={text=>this.setState({zonecode:text})}
+                         // 개행
+                        maxLength={100}
+                        autoCapitalize={'none'} //대문자 자동수정 안함
+                        editable={true}
+                    />
+                </View>
+                <Button title="주소찾기"
+                    onPress={()=>{
+                        this.props.navigation.navigate('findAddr',{
+                            onGoBack: (dData) => this.getAddr(dData),
+                        });
+                      }}
+                />
                 <View style={styles.inputView}>
                     <TextInput
                         value={this.state.address}
@@ -134,11 +174,24 @@ class RegisterCafeSceen extends Component {
                         editable={true}
                     />
                 </View>
+                <View style={styles.inputView}>
+                    <TextInput
+                        value={this.state.address_d}
+                        style={styles.input}
+                        placeholder="상세주소" 
+                        placeholderTextColor="#003f5c"
+                        onChangeText={text=>this.setState({address_d:text})}
+                         // 개행
+                        maxLength={100}
+                        autoCapitalize={'none'} //대문자 자동수정 안함
+                        editable={true}
+                    />
+                </View>
                 <TouchableOpacity
                     style={styles.loginBtn}
                     onPress={()=>{
                         this.addCafe(uid);
-                        this.state.latitude==!'' && this.props.navigation.navigate('Main');
+                        
                         // this.setState({updated:"true"})
                     }}
                 >
@@ -180,7 +233,17 @@ const styles = StyleSheet.create({
       justifyContent:"center",
       padding:20
     },
-    
+    inputView2:{
+        width:"45%",
+        backgroundColor:"#f2f2f2",
+        borderRadius:25,
+        height:45,
+        marginTop: 10,
+        left: -40,
+        marginBottom:10,
+        justifyContent:"center",
+        padding:20
+      },
     loginBtn:{
       width:"65%",
       backgroundColor:"#fb5b5a",
