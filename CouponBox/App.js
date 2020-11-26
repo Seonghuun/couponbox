@@ -32,6 +32,16 @@ HomeStack = () => {
   )
 }
 
+MapStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name = 'Map1' component = {TabMapScreen} options={{headerShown: false}}/>
+      <Stack.Screen name = 'Map2' component = {CafeDataScreen} options={{headerShown: false}}/>
+    </Stack.Navigator>
+  )
+  
+}
+
 // 탭 스크린
 MainPage = () => {
   return (
@@ -55,7 +65,7 @@ MainPage = () => {
     >
       <Tab.Screen name="Home" component={HomeStack}/>
       <Tab.Screen name="User" component={TabUserScreen}/>
-      <Tab.Screen name="Map" component={TabMapScreen}/>
+      <Tab.Screen name="Map" component={MapStack}/>
       <Tab.Screen name="Coupon" component={TabCouponScreen}/>
       
 

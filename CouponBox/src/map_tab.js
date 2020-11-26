@@ -5,6 +5,8 @@ import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import Modal from 'react-native-simple-modal';
 import firestore from "@react-native-firebase/firestore";
+import storage from '@react-native-firebase/storage';
+import auth from "@react-native-firebase/auth";
 
 /***************************** */
 /*  필수 사항
@@ -32,6 +34,7 @@ async function requestLocationPermission() {
 
 class TabMapScreen extends Component{
   state={
+    uid: '',
     region: {
       latitude: 37.610810,
       longitude: 126.996610,
@@ -40,18 +43,29 @@ class TabMapScreen extends Component{
     },
     //현재 카페
     nowCafe: {
-      cafeName: 'Default',
-      cafeAddress: 'Seoul Default',
+      
+      address: 'Seoul Default',
       latitude: 0,
       longitude: 0,
+      manager: 'none',
+      name: 'Default',
+      owner: 'none',
+      registerDate: '',
+      tel: 'none'
+
+
     },
+    nowCafeIdx: 0,
     cafeInfo: [],
+    updated: false,
     
     open: false,
   }
 
   constructor(){
     super();
+    this.getcafeLists();
+    this.getUid();
     this.getLocation();
   }
 
@@ -76,6 +90,15 @@ class TabMapScreen extends Component{
     console.log(region.longitude);
   }
 
+  getUid() {
+    auth().onAuthStateChanged(user => {
+        if(user!=null){
+            
+            this.setState({uid:user.uid});                
+        }         
+    })
+}
+
   getcafeLists() {
     const {cafeInfo} = this.state;
     firestore().collection('cafelist').get().
@@ -83,14 +106,41 @@ class TabMapScreen extends Component{
         console.log('Total cafes: ', querySnapshot.size);
         cafeInfo.splice(0, cafeInfo.length);       
         querySnapshot.forEach(documentSnapshot => {
-            // 카페 아이디 (cafe1)
-            cafeList.push(documentSnapshot.id);
             // 카페 데이터 (필드)
             cafeInfo.push(documentSnapshot.data());
         
         })
-        this.setState({updated : 'true'});
+        console.log(typeof(cafeInfo[0].latitude));
+        this.setState({updated:true});
+        
     })
+}
+
+getImage() {
+    // const {imageUrl} = this.state;
+    // 일단 로고만 불러옴
+    let imageRef = storage().ref('cafeImages/cafe'+(this.state.nowCafeIdx+1)+'/1');
+    
+    imageRef.getDownloadURL()
+    .then((url) => {
+        // console.log(url);
+        console.log('navigate to cafedata');
+        this.props.navigation.navigate('Map2', {
+            cafeId: 'cafe'+ this.state.nowCafeIdx+1,
+            data: this.state.nowCafe,
+            image: url,
+            uid: this.state.uid,
+            
+        })
+    }).catch((e)=>{
+        console.log(e)
+        this.props.navigation.navigate('Map2', {
+            cafeId: 'cafe'+ this.state.nowCafeIdx+1,
+            data: this.state.nowCafe,
+            uid: this.state.uid,
+            
+        })
+    });
 }
 
   componentDidMount() {
@@ -99,26 +149,8 @@ class TabMapScreen extends Component{
   }
 
   render () {
-    //카페 리스트
-    const cafeList = [
-      {
-        cafeName: 'Cafe1', cafeAddress: 'Seoul Default', 
-        latitude: 37.61082, longitude: 126.99661,
-      },
-      {
-        cafeName: 'Cafe2', cafeAddress: 'Seoul Default',
-        latitude: 37.61183, longitude: 126.99662,
-      },
-      {
-        cafeName: 'Cafe3', cafeAddress: 'Seoul Default',
-        latitude: 37.61284, longitude: 126.99661,
-      },
-    ]
-    var cafes=3;
-
-    console.log('cafe1 '+cafeList[0].latitude);
-    console.log('cafe2 '+cafeList[1].latitude);
-    console.log('cafe3 '+cafeList[2].latitude);
+      console.log('render 시작')
+ 
     return (
       <View style={{flex:1, padding:16,}}>
           <MapView 
@@ -127,26 +159,39 @@ class TabMapScreen extends Component{
             initialRegion={this.state.region}
             showsUserLocation={true}
             >
-            {[...Array(cafes)].map((n, index) => (
+            {this.state.cafeInfo.map((item, index) => (
               <Marker
-                coordinate={{ latitude: cafeList[index].latitude, longitude: cafeList[index].longitude }}
-                TouchableOpacity onPress={() => this.setState({ open: true, nowCafe: cafeList[index] })} 
+                key={index}
+                coordinate={{ latitude: item.latitude, longitude: item.longitude }}
+                TouchableOpacity onPress={() => this.setState({ open: true, nowCafe: item, nowCafeIdx: index })} 
               />
-            ))}
+            ))
+            }
           </MapView>
           <Modal
+          offset={250}
+            // isVisible={this.state.visibleModal === 5}
             open={this.state.open}
+            
             modalDidClose={() => this.setState({ open: false })}
             style={{ alignItems: 'center' }}>
+            
             <View>
+                <TouchableOpacity
+                onPress={()=>{
+                    this.getImage();
+                }}
+                >
+                <Text>
+                {this.state.nowCafe.name}
+              </Text>
+                </TouchableOpacity>
+              
               <Text>
-                {this.state.nowCafe.cafeName}
+                {this.state.nowCafe.tel}
               </Text>
               <Text>
-                010-xxxx-xxxx
-              </Text>
-              <Text>
-                서울시 성북구 어디어디
+                {this.state.nowCafe.address}
               </Text>
 
           </View>

@@ -35,7 +35,7 @@ class RegisterCafeSceen extends Component {
                         registerDate : new Date(),
                         owner: id,
                         latitude: 37.61081,
-                        logitude: 126.99661
+                        longitude: 126.99661
                         
                     })
                     .then(() => {

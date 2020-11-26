@@ -27,7 +27,7 @@
       <!-- 구글지도 사용을 위한 API 키 등록 -->
       <meta-data
         android:name="com.google.android.geo.API_KEY"
-        
+        android:value="${googleMapApiKey}"/>
     </application>
 
 </manifest>
