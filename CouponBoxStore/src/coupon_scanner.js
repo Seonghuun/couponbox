@@ -32,10 +32,12 @@ class CouponScanScreen extends Component {
     //qr스캐너가 읽었을 경우 처리하는 부분
     const {scan, UserID} = this.state;
     const onSuccess = (e) => {
-      this.setState({scan: false, UserID: e.data})
+      this.setState({scan: false, UserID: e.data.split(',')[0]})
       console.log(scan)
       console.log(e.data)
+      console.log(UserID)
       addStamp(UserID)
+      alert(e.data)
       Alert.alert(
         '스탬프 발급',
         UserID+'님의 스탬프 발급에 성공했습니다.',

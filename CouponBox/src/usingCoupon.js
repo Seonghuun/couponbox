@@ -10,7 +10,7 @@ import React, { Component } from 'react';
 import { AppRegistry, View, Text, TextInput } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
-class GetCouponScreen extends Component{
+class UsingCouponScreen extends Component{
 
   render () {
     const userUID = "User1";
@@ -21,14 +21,13 @@ class GetCouponScreen extends Component{
         alignItems: 'center',
         justifyContent: 'center'
     }}>
-        <Text>Get Coupon</Text>
+        <Text>Use Coupon</Text>
         <QRCode
-        
-          value={userUID+',getStamp'}
+          value={userUID+',useCoupon'}
           />
       </View>
     );
   }
 }
 
-export default GetCouponScreen;
+export default UsingCouponScreen;

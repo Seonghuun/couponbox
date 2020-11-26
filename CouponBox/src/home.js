@@ -48,9 +48,14 @@ class HomeScreen extends Component{
         <Button
             title="쿠폰 사용"
             onPress={()=>{
-                this.props.navigation.navigate('UseCoupon',
-                  {db}
-                )
+                this.props.navigation.navigate('UseCoupon', {db})
+            }}
+        />
+        <Text/>
+        <Button
+            title="  지도  "
+            onPress={()=>{
+                this.props.navigation.navigate('Map')
             }}
         />
       </View>
