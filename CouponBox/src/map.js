@@ -104,9 +104,6 @@ class MapScreen extends Component{
     ]
     var cafes=3;
 
-    console.log('cafe1 '+cafeList[0].latitude);
-    console.log('cafe2 '+cafeList[1].latitude);
-    console.log('cafe3 '+cafeList[2].latitude);
     return (
       <View style={{flex:1, padding:16,}}>
           <MapView 
