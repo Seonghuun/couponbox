@@ -17,6 +17,7 @@ import Main from './src/main';
 import RegisterCafeScreen from './src/registerCafe';
 import CafeDetailScreen from './src/cafedetail';
 import EditCafeScreen from './src/editcafe';
+import CouponScanScreen from './src/couponscanner';
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,7 @@ class App extends Component {
           <Stack.Screen name = 'Register' component = {RegisterCafeScreen} options={{headerShown: false}}/>
           <Stack.Screen name = 'Detail' component = {CafeDetailScreen} options={{headerShown: false}}/>
           <Stack.Screen name = 'Edit' component = {EditCafeScreen} options={{headerShown: false}}/>
+          <Stack.Screen name = 'CouponScan' component = {CouponScanScreen} options={{headerShown: false}}/>
           
         </Stack.Navigator>
         

@@ -68,7 +68,7 @@ class CafeDetailScreen extends Component {
                 <TouchableOpacity
                     style={styles.loginBtn}
                     onPress={()=>{
-                        // this.addCafe()
+                        this.props.navigation.navigate('CouponScan');
                      
                     }}
                 >

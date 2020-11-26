@@ -135,6 +135,8 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+        missingDimensionStrategy 'react-native-camera', 'general'
+        // missingDimensionStrategy 'react-native-camera', 'mlkit'
     }
     splits {
         abi {
@@ -184,7 +186,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "com.facebook.react:react-native:+"  // From node_modules
+    // implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation platform('com.google.firebase:firebase-bom:26.0.0')
     implementation 'com.google.firebase:firebase-analytics'
 
