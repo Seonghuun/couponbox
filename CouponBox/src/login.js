@@ -24,6 +24,7 @@ class LoginScreen extends Component { //컴포넌트 상속하는 앱
       // alert('login success');
       this.props.navigation.navigate('Main'); 
       
+      
     })
     .catch(error=> {
       alert('login fail');

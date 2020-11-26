@@ -1,9 +1,10 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
-import { View, Text, Button, PermissionsAndroid, TouchableOpacity } from 'react-native';
+import { View, Text, Image, PermissionsAndroid, TouchableOpacity, StyleSheet } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import Modal from 'react-native-simple-modal';
+// import Modal from 'react-native-modal';
 import firestore from "@react-native-firebase/firestore";
 import storage from '@react-native-firebase/storage';
 import auth from "@react-native-firebase/auth";
@@ -35,6 +36,7 @@ async function requestLocationPermission() {
 class TabMapScreen extends Component{
   state={
     uid: '',
+    visibleModal: null,
     region: {
       latitude: 37.610810,
       longitude: 126.996610,
@@ -58,6 +60,7 @@ class TabMapScreen extends Component{
     nowCafeIdx: 0,
     cafeInfo: [],
     updated: false,
+    imageUrl: '',
     
     open: false,
   }
@@ -116,45 +119,31 @@ class TabMapScreen extends Component{
     })
 }
 
-getImage() {
+getImage(idx) {
     // const {imageUrl} = this.state;
     // 일단 로고만 불러옴
-    let imageRef = storage().ref('cafeImages/cafe'+(this.state.nowCafeIdx+1)+'/1');
+    let imageRef = storage().ref('cafeImages/cafe'+(idx+1)+'/1');
     
     imageRef.getDownloadURL()
     .then((url) => {
-        // console.log(url);
-        console.log('navigate to cafedata');
-        this.props.navigation.navigate('Map2', {
-            cafeId: 'cafe'+ this.state.nowCafeIdx+1,
-            data: this.state.nowCafe,
-            image: url,
-            uid: this.state.uid,
-            
-        })
+      this.setState({imageUrl:url})
+      console.log('getimage');
     }).catch((e)=>{
         console.log(e)
-        this.props.navigation.navigate('Map2', {
-            cafeId: 'cafe'+ this.state.nowCafeIdx+1,
-            data: this.state.nowCafe,
-            uid: this.state.uid,
-            
-        })
+        this.setState({imageUrl:''})
     });
 }
 
-  componentDidMount() {
-    requestLocationPermission();
+  // componentDidMount() {
+  //   requestLocationPermission();
     
-  }
+  // }
 
   render () {
-      console.log('render 시작')
- 
     return (
-      <View style={{flex:1, padding:16,}}>
+      <View style={{flex:1}}>
           <MapView 
-            style={{flex:1,}}
+            style={{flex:1}}
             provider={PROVIDER_GOOGLE}
             initialRegion={this.state.region}
             showsUserLocation={true}
@@ -163,42 +152,70 @@ getImage() {
               <Marker
                 key={index}
                 coordinate={{ latitude: item.latitude, longitude: item.longitude }}
-                TouchableOpacity onPress={() => this.setState({ open: true, nowCafe: item, nowCafeIdx: index })} 
+                TouchableOpacity onPress={() => 
+                  {
+                    this.getImage(index);
+                    console.log('setstate');
+                    this.setState({ open: true, nowCafe: item, nowCafeIdx: index })
+                    
+                  } 
+                  }
               />
             ))
             }
           </MapView>
-          <Modal
-          offset={250}
-            // isVisible={this.state.visibleModal === 5}
-            open={this.state.open}
-            
-            modalDidClose={() => this.setState({ open: false })}
-            style={{ alignItems: 'center' }}>
-            
-            <View>
-                <TouchableOpacity
-                onPress={()=>{
-                    this.getImage();
-                }}
-                >
-                <Text>
-                {this.state.nowCafe.name}
-              </Text>
-                </TouchableOpacity>
-              
-              <Text>
-                {this.state.nowCafe.tel}
-              </Text>
-              <Text>
-                {this.state.nowCafe.address}
-              </Text>
 
+          <Modal
+            offset={250}
+            open={this.state.open}            
+            modalDidClose={() => this.setState({ open: false, imageUrl:'' })}
+            // style={{ alignItems: 'center' }}
+            modalStyle={{
+              width: '90%',
+              height: '16%'
+            }}
+            
+            >
+            
+            <View style={styles.topView}>
+              <View style={{flexDirection:'column'}}>
+                <TouchableOpacity
+                  onPress={()=>{
+                    console.log('navigate to cafedata');
+                    this.props.navigation.navigate('Map2', {
+                      cafeId: 'cafe'+ this.state.nowCafeIdx+1,
+                      data: this.state.nowCafe,
+                      image: this.state.imageUrl,
+                      uid: this.state.uid,
+                    })
+                  }}>
+                  <Text style={{color:'blue', fontSize:15}}>{this.state.nowCafe.name}</Text>
+                </TouchableOpacity>
+                <Text style={{fontSize:12}}>{this.state.nowCafe.address}</Text>
+              </View>
+
+              <Image
+                    style={{height:80, width:80, marginRight:10}} 
+                    source={{uri: this.state.imageUrl}}
+              />
           </View>
         </Modal>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+
+  topView:{
+      flex:1,
+      justifyContent:'flex-start',
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginHorizontal: 50
+      
+  }
+
+})
 
 export default TabMapScreen;
