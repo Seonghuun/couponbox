@@ -31,6 +31,26 @@ class SignupScreen extends Component {
     }
 
     signup() {
+        if(!this.state.email){
+            alert('이메일을 입력해주세요');
+            return;
+          }
+          if(!this.state.pw){
+            alert('비밀번호를 입력해주세요');
+            return;
+          }
+          if(!this.state.name){
+            alert('이름을 입력해주세요');
+            return;
+          }
+          if(!this.state.phonenum){
+            alert('휴대폰 번호를 입력해주세요');
+            return;
+          }
+          if(this.state.pw.length<6){
+            alert('비밀번호는 최소 6자 입니다.');
+            return;
+          }
         auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.pw)
             .then(() => {
@@ -128,7 +148,15 @@ class SignupScreen extends Component {
                     }}
                 >
                     <Text style={styles.loginText}>Sign up and Log in</Text>
-                </TouchableOpacity>  
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.cancelBtn}
+                    onPress={()=>{
+                        this.props.navigation.navigate('Login');
+                    }}
+                >
+                    <Text style={styles.loginText}>Cancel</Text>
+                </TouchableOpacity>   
             </View>
         )
     }
@@ -174,8 +202,18 @@ const styles = StyleSheet.create({
       alignItems:"center",
       justifyContent:"center",
       marginTop:20,
-      marginBottom:20
-    }
+      marginBottom:10
+    },
+    cancelBtn:{
+        width:"65%",
+        backgroundColor:"#f2f2f2",
+        borderRadius:25,
+        height:50,
+        alignItems:"center",
+        justifyContent:"center",
+        marginTop:10,
+        marginBottom:10
+      }
       
   })
 

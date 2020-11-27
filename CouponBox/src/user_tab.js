@@ -42,7 +42,17 @@ class TabUserScreen extends Component {
     constructor(props) {
         super(props);
         this.checkLogin();
-      }
+    }
+    
+    componentDidMount() {
+        this._unsubscribe = this.props.navigation.addListener('focus', () => {
+          this.checkLogin();
+        });
+    }
+      
+    componentWillUnmount() {
+        this._unsubscribe();
+    }
     
     render () {
         return (
@@ -68,7 +78,11 @@ class TabUserScreen extends Component {
                     <TouchableOpacity style={styles.BtnTheme}>
                         <Text>쿠폰 내역</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.BtnTheme}>
+                    <TouchableOpacity style={styles.BtnTheme}
+                    onPress = {()=>{
+                        this.props.navigation.navigate('EditProfile', {uid:this.state.myUID, email:this.state.myEmail});
+                    }}
+                    >
                         <Text>프로필 편집</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.BtnTheme_2}

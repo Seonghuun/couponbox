@@ -13,6 +13,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'; 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; 
 import TabUserScreen from './src/user_tab';
+import UserProfileScreen from './src/userProfile';
 import TabHomeScreen from './src/home_tab';
 import TabMapScreen from './src/map_tab';
 import AllCouponListScreen from './src/coupon_tab';
@@ -22,6 +23,7 @@ import CafeDataScreen from './src/cafedata';
 import GetCouponScreen from './src/getCoupon';
 import CouponListScreen from './src/couponList';
 import UsableCouponScreen from './src/usableCoupon';
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -51,6 +53,24 @@ MapStack = () => {
   
 }
 
+CouponStack = () =>{
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name = 'AllCouponList' component = {AllCouponListScreen} options={{headerShown: false}}/>
+      <Stack.Screen name = 'UsableCoupon' component = {UsableCouponScreen} options={{headerShown: false}}/>
+    </Stack.Navigator>
+  )
+}
+
+UserStack = () =>{
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name = 'User1' component = {TabUserScreen} options={{headerShown: false}}/>
+      <Stack.Screen name = 'EditProfile' component = {UserProfileScreen} options={{headerShown: false}}/>
+    </Stack.Navigator>
+  )
+}
+
 // 탭 스크린
 MainPage = () => {
   return (
@@ -73,9 +93,9 @@ MainPage = () => {
       })}
     >
       <Tab.Screen name="Home" component={HomeStack}/>
-      <Tab.Screen name="User" component={TabUserScreen}/>
+      <Tab.Screen name="User" component={UserStack}/>
       <Tab.Screen name="Map" component={MapStack}/>
-      <Tab.Screen name="Coupon" component={AllCouponListScreen}/>
+      <Tab.Screen name="Coupon" component={CouponStack}/>
       
 
     </Tab.Navigator>

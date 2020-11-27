@@ -31,8 +31,8 @@ class AllCouponListScreen extends Component{
             stamps.splice(0, stamps.length);
             querySnapshot.forEach(documentSnapshot => {
                 const tmp = new Object();  
-                tmp.id = documentSnapshot.data().cafeId;
-                tmp.name = documentSnapshot.data().cafeName;
+                tmp.id = documentSnapshot.id;
+                tmp.name = documentSnapshot.data().name;
                 tmp.num = documentSnapshot.data().number;
                 if(tmp.num >= 10){
                     const cNum = Math.floor(tmp.num/10);

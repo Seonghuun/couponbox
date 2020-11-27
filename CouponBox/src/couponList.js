@@ -32,7 +32,6 @@ class CouponListScreen extends Component{
     // const db = params ? params.db : null;
     const db = firestore();
     const userUID = params ? params.uid : null;
-    const data = params ? params.data : null;
     const coupons = params ? params.coupons : null;
     const stamps = params ? params.stamps : null;
     const sPage = stamps.length;

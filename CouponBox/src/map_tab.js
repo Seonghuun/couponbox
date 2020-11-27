@@ -142,7 +142,7 @@ getImage(idx) {
   render () {
     return (
       <View style={{flex:1}}>
-          <MapView 
+          <MapView
             style={{flex:1}}
             provider={PROVIDER_GOOGLE}
             initialRegion={this.state.region}

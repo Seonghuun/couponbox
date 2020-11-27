@@ -14,9 +14,9 @@ class CafeDataScreen extends Component {
             console.log(querySnapshot.size); 
             const tmp = new Object();    
             querySnapshot.forEach(documentSnapshot => {
-                if (documentSnapshot.data().cafeId == cafeId){
+                if (documentSnapshot.id == cafeId){
                     tmp.id = cafeId;
-                    tmp.name = documentSnapshot.data().cafeName;
+                    tmp.name = documentSnapshot.data().name;
                     tmp.num = documentSnapshot.data().number;                    
                 }            
             })
@@ -44,7 +44,7 @@ class CafeDataScreen extends Component {
             }
 
             
-            this.props.navigation.navigate('CouponList', {uid:uid, data: tmp, coupons: coupons, stamps:stamps});
+            this.props.navigation.navigate('CouponList', {uid:uid, coupons: coupons, stamps:stamps});
             
 
         })
