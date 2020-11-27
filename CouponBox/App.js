@@ -15,7 +15,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabUserScreen from './src/user_tab';
 import TabHomeScreen from './src/home_tab';
 import TabMapScreen from './src/map_tab';
-import TabCouponScreen from './src/coupon_tab';
+import AllCouponListScreen from './src/coupon_tab';
 import LoginScreen from './src/login';
 import SignupScreen from './src/signup';
 import CafeDataScreen from './src/cafedata';
@@ -75,7 +75,7 @@ MainPage = () => {
       <Tab.Screen name="Home" component={HomeStack}/>
       <Tab.Screen name="User" component={TabUserScreen}/>
       <Tab.Screen name="Map" component={MapStack}/>
-      <Tab.Screen name="Coupon" component={TabCouponScreen}/>
+      <Tab.Screen name="Coupon" component={AllCouponListScreen}/>
       
 
     </Tab.Navigator>

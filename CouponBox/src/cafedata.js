@@ -31,10 +31,16 @@ class CafeDataScreen extends Component {
                 for (var i =0; i< cNum; i++){
                     coupons.push({CafeName:tmp.name, CafeID: tmp.id, number: 10});
                 }
-                stamps.push({CafeName:tmp.name, CafeID: tmp.id, number:sNum});
+                if(sNum>0){
+                    stamps.push({CafeName:tmp.name, CafeID: tmp.id, number:sNum});
+                }
+                
             }
             else{
-                stamps.push({CafeName:tmp.name, CafeID: tmp.id, number:tmp.num});
+                if (tmp.num>0){
+                    stamps.push({CafeName:tmp.name, CafeID: tmp.id, number:tmp.num});
+                }
+                
             }
 
             
