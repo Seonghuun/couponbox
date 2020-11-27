@@ -10,11 +10,8 @@ import firestore from '@react-native-firebase/firestore';
 class CouponScanScreen extends Component {
   state = {
     scan: true,
-    UserID: 'Default',
   };
 
-
-  
   render () {
 
     // //파이어베이스 db를 인자로 받아오는 부분
@@ -23,41 +20,179 @@ class CouponScanScreen extends Component {
     const db = firestore();
     
     //const UserID = 'User1';
-    const CafeID = 'Cafe1';
-    
-    //qr스캐너가 읽었을 경우 처리하는 부분
-    const {scan, UserID} = this.state;
-    const onSuccess = (e) => {
-      this.setState({scan: false, UserID: e.data})
-      console.log(scan)
-      console.log(e.data)
-      addStamp(UserID)
-      Alert.alert(
-        '스탬프 발급',
-        UserID+'님의 스탬프 발급에 성공했습니다.',
-        [
-          {text: '확인', onPress: () => this.setState({scan: true})}
-        ]
+    //const CafeID = 'Cafe1';
+    const {params} = this.props.route;
+    const cafeID = params ? params.cafeId : null;
+    const cafeName = params ? params.cafeName : null;
 
-      )
+    //qr스캐너가 읽었을 경우 처리하는 부분
+    const {scan} = this.state;
+    const onSuccess = (e) => {
+      const UserID = e.data.split(',')[0];
+      const Command = e.data.split(',')[1];
+      this.setState({scan: false})
+      console.log('CafeID: ', cafeID);
+      console.log('CafeName: ', cafeName);
+      console.log('scanOK?: ', this.state.scan);
+      console.log('qrscan Data: ', e.data);
+      console.log('UserID: ', UserID);
+      if(Command==='getStamp'){
+        console.log('get stamp');
+        addStamp(UserID);
+      }
+      else if(Command==='useCoupon'){
+        console.log('use Coupon');
+        useCoupon(UserID);
+      }
+      else{
+        Alert.alert(
+          'QR코드 오류',
+          'QR코드를 확인해 주십시오',
+          [{text: '확인', onPress: () => this.setState({scan: true})}]
+        )
+      }
+    }
+
+    //쿠폰 사용하는 부분
+    const useCoupon = (UserID) => {
+      const UserDoc = db.collection('userlist')
+        .doc(UserID);
+      UserDoc.get()
+        .then(doc => {
+          if(doc.exists){ //유저가 존재하는 경우
+            const CafeDoc = UserDoc.collection('stamp').doc(cafeID);
+            CafeDoc.get()
+              .then(doc => {
+                if(!doc.exists){ // 카페가 존재하지 않는 경우
+                  console.log('CafeDoc not exist');
+                  const alertTitle = '사용 실패';
+                  const alertMsg = '잘못된 QR코드 입니다';
+                }
+                else{
+                  if(doc.data().number>=10){
+                    const nextNum = doc.data().number-10;
+                    CafeDoc.update({number: nextNum});
+                    Alert.alert(
+                      '사용 완료',
+                      '쿠폰 사용에 성공했습니다',
+                      [{text: '확인', onPress: () => this.setState({scan: true})}]
+                    )
+                  }
+                  else{
+                    Alert.alert(
+                      '사용 실패',
+                      '스탬프의 개수가 모자랍니다',
+                      [{text: '확인', onPress: () => this.setState({scan: true})}]
+                    )
+                  }
+                }
+              })
+              .catch(err => {
+                console.log('Error getting Cafedoc', err);
+                Alert.alert(
+                  '오류발생',
+                  'CafeDoc오류가 발생했습니다',
+                  [{text: '확인', onPress: () => this.setState({scan: true})}]
+                )
+              })
+          }
+          else{
+            Alert.alert(
+              'QR코드 오류',
+              '잘못된 QR코드 입니다',
+              [{text: '확인', onPress: () => this.setState({scan: true})}]
+            )
+          }
+        })
+        .catch(err => {
+          console.log('Error getting Userdoc', err);
+          Alert.alert(
+            '오류발생',
+            'UserDoc오류가 발생했습니다',
+            [{text: '확인', onPress: () => this.setState({scan: true})}]
+          )
+        })
     }
 
     //도장 개수 늘려주는 부분
-    //!!!도장이 없는 경우, 필드를 생성? 해줘야함
     const addStamp = (UserID) => {
-      const CafeDoc = db.collection('test')
-      .doc('User')
-      .collection('UserList')
-      .doc(UserID)
-      .collection('Stamps')
-      .doc(CafeID);
-      CafeDoc.get()
-      .then(doc => {
-        const nowNum = doc.data().StampNumber + 1;
-        console.log(nowNum);
-        CafeDoc.update({StampNumber: nowNum});
-      })
+      const UserDoc = db.collection('userlist')
+        .doc(UserID);
+      UserDoc.get()
+        .then(doc => {
+          if(doc.exists){ //유저가 존재하는 경우
+            const CafeDoc = UserDoc.collection('stamp').doc(cafeID);
+            CafeDoc.get()
+              .then(doc => {
+                if(!doc.exists){ // 카페가 존재하지 않는 경우
+                  console.log('CafeDoc not exist');
+                  CafeDoc.set({name: cafeName, number: 1});
+                  //console.log(test1.number);
+                }
+                else{
+                  const nextNum = doc.data().number+1;
+                  console.log('now stamp number: ', nextNum);
+                  CafeDoc.update({number: nextNum});
+                }
+                Alert.alert(
+                  '스탬프 발급',
+                  '스탬프 발급에 성공했습니다.',
+                  [{text: '확인', onPress: () => this.setState({scan: true})}]
+                )
+              })
+              .catch(err => {
+                console.log('Error getting Cafedoc', err);
+              })
+          }
+          else{
+            Alert.alert(
+              'QR코드 오류',
+              '잘못된 QR코드 입니다',
+              [{text: '확인', onPress: () => this.setState({scan: true})}]
+            )
+          }
+        })
+        .catch(err => {
+          console.log('Error getting Userdoc', err);
+          Alert.alert(
+            '오류발생',
+            '오류가 발생했습니다',
+            [{text: '확인', onPress: () => this.setState({scan: true})}]
+          )
+        })
     }
+        /*
+      const CafeDoc = db.collection('userlist')
+        .doc(UserID)
+        .collection('stamp')
+        .doc(cafeID);
+      CafeDoc.get()
+        .then(doc => {
+          if(!doc.exists){ // 카페가 존재하지 않는 경우
+            console.log('CafeDoc not exist');
+            CafeDoc.set({number: 1});
+            //console.log(test1.number);
+          }
+          else{
+            const nextNum = doc.data().number+1;
+            console.log('now stamp number: ', nextNum);
+            CafeDoc.update({number: nextNum});
+          }
+          Alert.alert(
+            '스탬프 발급',
+            this.state.UserID+'님의 스탬프 발급에 성공했습니다.',
+            [{text: '확인', onPress: () => this.setState({scan: true})}]
+          )
+        })
+        .catch(err => {
+          console.log('Error getting doc', err);
+          Alert.alert(
+            '오류발생',
+            '오류가 발생했습니다',
+            [{text: '확인', onPress: () => this.setState({scan: true})}]
+          )
+        })*/
+      
 
     return (
       <>

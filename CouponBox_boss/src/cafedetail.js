@@ -35,10 +35,7 @@ class CafeDetailScreen extends Component {
             })
         })
         
-
     }
-    
-
 
     render() {
         const {params} = this.props.route;
@@ -59,8 +56,6 @@ class CafeDetailScreen extends Component {
                     onPress={()=>{
                         this.addImage(cafeId);
                         // this.uploadImage(cafeId);
-                            
-                   
                     }}
                 >
                     <Text style={styles.loginText}>이미지 업로드</Text>
@@ -68,11 +63,11 @@ class CafeDetailScreen extends Component {
                 <TouchableOpacity
                     style={styles.loginBtn}
                     onPress={()=>{
-                        this.props.navigation.navigate('CouponScan');
+                        this.props.navigation.navigate('CouponScan', {cafeId: cafeId, cafeName: data.name});
                      
                     }}
                 >
-                    <Text style={styles.loginText}>도장 찍기</Text>
+                    <Text style={styles.loginText}>QR 스캐너</Text>
                 </TouchableOpacity>  
                 <TouchableOpacity
                     style={styles.loginBtn}
