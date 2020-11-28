@@ -7,7 +7,7 @@ import CompleteCouponPan from './completeCouponPan';
 import firestore from "@react-native-firebase/firestore";
 
 
-
+// 내가 보유한 해당 카페의 쿠폰
 class CouponListScreen extends Component{
   state = {
     sliderState: {currentPage: 0},    
@@ -27,9 +27,8 @@ class CouponListScreen extends Component{
 
   render () {
 
-    //파이어베이스 db를 인자로 받아오는 부분
+    //인자로 받아오는 부분
     const {params} = this.props.route;
-    // const db = params ? params.db : null;
     const db = firestore();
     const userUID = params ? params.uid : null;
     const coupons = params ? params.coupons : null;
@@ -39,8 +38,7 @@ class CouponListScreen extends Component{
 
 
     console.log(stamps);
-    //유저 데이터
-    // const userUID = 'User1'
+
 
     const gotoUsingCoupon = () => {
       this.props.navigation.navigate('UsableCoupon', {uid:userUID})

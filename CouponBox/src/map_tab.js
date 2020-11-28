@@ -4,7 +4,6 @@ import { View, Text, Image, PermissionsAndroid, TouchableOpacity, StyleSheet } f
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import Modal from 'react-native-simple-modal';
-// import Modal from 'react-native-modal';
 import firestore from "@react-native-firebase/firestore";
 import storage from '@react-native-firebase/storage';
 import auth from "@react-native-firebase/auth";
@@ -134,10 +133,15 @@ getImage(idx) {
     });
 }
 
-  // componentDidMount() {
-  //   requestLocationPermission();
-    
-  // }
+componentDidMount() {
+  this._unsubscribe = this.props.navigation.addListener('focus', () => {
+    requestLocationPermission();
+  });
+}
+
+componentWillUnmount() {
+  this._unsubscribe();
+}
 
   render () {
     return (
@@ -151,7 +155,7 @@ getImage(idx) {
             {this.state.cafeInfo.map((item, index) => (
               <Marker
                 key={index}
-                coordinate={{ latitude: item.latitude, longitude: item.longitude }}
+                coordinate={{ latitude : item.latitude ? item.latitude : 0, longitude: item.longitude ? item.longitude : 0 }}
                 TouchableOpacity onPress={() => 
                   {
                     this.getImage(index);
