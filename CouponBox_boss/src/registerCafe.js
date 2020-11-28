@@ -20,8 +20,8 @@ class RegisterCafeSceen extends Component {
         address_d : '' , //상세주소
         manager : '',
         updated : '',
-        latitude : '',
-        longitude: '',
+        latitude : 0,
+        longitude: 0,
     }
     
 
@@ -36,23 +36,25 @@ class RegisterCafeSceen extends Component {
 
 
     //주소를 위도,경도로 변환해주는 함수
-    toGeocode (addr){
-        const {latitude, longitude} = this.state;
-        Geocoder.from(addr)
+    async toGeocode (addr){
+        await Geocoder.from(addr)
           .then(json => {
-              var location = json.results[0].geometry.location;
+              const location = json.results[0].geometry.location;
               console.log("toGeocode test : ",location);
               this.setState({latitude: location.lat, longitude:location.lng});
-              console.log('after geocode',this.state);
+              console.log('after geocode',this.state.latitude, this.state.longitude);
           })
           .catch(error => console.warn(error));
       }
 
-    addCafe(id) {
-        this.toGeocode (this.state.address);
-        this.state.address==='' ?
-        alert('잘못된 주소 입니다') :
-        firestore().collection('cafelist').get().
+    //카페 추가하는 부분
+    async addCafe(id) {
+        this.toGeocode(this.state.address);
+        if(this.state.longitude===0){
+            alert('다시 시도해 주십시오.');
+        }
+        else{
+            await firestore().collection('cafelist').get().
             then(querySnapshot=>{
                 var size = querySnapshot.size+1;
                 console.log('Total cafes: ', querySnapshot.size);
@@ -64,6 +66,7 @@ class RegisterCafeSceen extends Component {
                         name : this.state.caffe_name,
                         manager : this.state.manager,
                         address : this.state.address,
+                        addrees_d : this.state.address_d,
                         tel : this.state.tel,
                         registerDate : new Date(),
                         owner: id,
@@ -76,7 +79,7 @@ class RegisterCafeSceen extends Component {
                         this.props.navigation.navigate('Main');
                     });
             });
-        
+        }
     }
     uploadImage(id) {
         const reference = storage().ref('cafeImages/cafe'+id+'/create');
