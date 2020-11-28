@@ -1,8 +1,9 @@
 import 'react-native-gesture-handler';
-import React, { Component } from 'react';
+import React, { Component, useEffect, useRef } from 'react';
 import { View, Text, Image, PermissionsAndroid, TouchableOpacity, StyleSheet } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
+// import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Modal from 'react-native-simple-modal';
 import firestore from "@react-native-firebase/firestore";
 import storage from '@react-native-firebase/storage';
@@ -35,16 +36,17 @@ async function requestLocationPermission() {
 class TabMapScreen extends Component{
   state={
     uid: '',
+    query: '',
     visibleModal: null,
     region: {
-      latitude: 37.610810,
+      latitude: 37.610,
       longitude: 126.996610,
       latitudeDelta: 0.006,
       longitudeDelta: 0.009
     },
     //현재 카페
     nowCafe: {
-      
+      id : 'cafe0',
       address: 'Seoul Default',
       latitude: 0,
       longitude: 0,
@@ -56,6 +58,7 @@ class TabMapScreen extends Component{
 
 
     },
+    mapList: [],
     nowCafeIdx: 0,
     cafeInfo: [],
     updated: false,
@@ -102,33 +105,54 @@ class TabMapScreen extends Component{
 }
 
   getcafeLists() {
-    const {cafeInfo} = this.state;
+    const {mapList, cafeInfo} = this.state;
     firestore().collection('cafelist').get().
     then(querySnapshot=>{
         console.log('Total cafes: ', querySnapshot.size);
         cafeInfo.splice(0, cafeInfo.length);       
         querySnapshot.forEach(documentSnapshot => {
-            // 카페 데이터 (필드)
-            cafeInfo.push(documentSnapshot.data());
+          // 자동완성에 띄울 객체 형식에 맞게 생성후 mapList에 저장
+          const tmp = new Object();
+          tmp.description= documentSnapshot.data().name;
+          const tmp_2 = new Object();
+          const tmp_3 = new Object();
+          tmp.geometry = tmp_2;
+          tmp.geometry.location = tmp_3;
+          tmp.geometry.location.lat = documentSnapshot.data().latitude;
+          tmp.geometry.location.lng = documentSnapshot.data().longitude;
+          mapList.push(tmp);
+
+          // 마커와 모달에 사용할 객체 생성후 cafeInfo에 저장
+          const tmp_4 = new Object();
+          tmp_4.id = documentSnapshot.id;
+          tmp_4.address = documentSnapshot.data().address;
+          tmp_4.latitude = documentSnapshot.data().latitude;
+          tmp_4.longitude = documentSnapshot.data().longitude;
+          tmp_4.manager = documentSnapshot.data().manager;
+          tmp_4.name = documentSnapshot.data().name;
+          tmp_4.owner = documentSnapshot.data().owner;
+          tmp_4.registerDate = documentSnapshot.data().registerDate;
+          tmp_4.tel = documentSnapshot.data().tel;
+          cafeInfo.push(tmp_4);
         
         })
-        console.log(typeof(cafeInfo[0].latitude));
+        // re-render을 위해서 setState
         this.setState({updated:true});
         
     })
 }
 
-getImage(idx) {
+getImage(id) {
     // const {imageUrl} = this.state;
     // 일단 로고만 불러옴
-    let imageRef = storage().ref('cafeImages/cafe'+(idx+1)+'/1');
+    let imageRef = storage().ref('cafeImages/'+ id+'/1');
     
     imageRef.getDownloadURL()
     .then((url) => {
       this.setState({imageUrl:url})
       console.log('getimage');
     }).catch((e)=>{
-        console.log(e)
+        // console.log(e)
         this.setState({imageUrl:''})
     });
 }
@@ -144,12 +168,26 @@ componentWillUnmount() {
 }
 
   render () {
+    const {params} = this.props.route;
+    const searchRegion = params ? params.region : null;
+    
     return (
       <View style={{flex:1}}>
+        <TouchableOpacity
+        onPress={() => 
+            this.props.navigation.navigate('Search', {mapList:this.state.mapList})
+          }
+        >
+          <Image
+            style={{height:60, alignItems:'center', resizeMode:'contain'}}
+            source = {require('../assets/images/searchbar.png')}
+          />
+        </TouchableOpacity>
           <MapView
-            style={{flex:1}}
+            style={{flex:4}}
             provider={PROVIDER_GOOGLE}
             initialRegion={this.state.region}
+            region={searchRegion}
             showsUserLocation={true}
             >
             {this.state.cafeInfo.map((item, index) => (
@@ -158,9 +196,9 @@ componentWillUnmount() {
                 coordinate={{ latitude : item.latitude ? item.latitude : 0, longitude: item.longitude ? item.longitude : 0 }}
                 TouchableOpacity onPress={() => 
                   {
-                    this.getImage(index);
-                    console.log('setstate');
-                    this.setState({ open: true, nowCafe: item, nowCafeIdx: index+1 })
+                    this.getImage(item.id);
+                    console.log(item.id, item.name);
+                    this.setState({ open: true, nowCafe: item})
                     
                   } 
                   }
@@ -187,7 +225,7 @@ componentWillUnmount() {
                   onPress={()=>{
                     console.log('navigate to cafedata');
                     this.props.navigation.navigate('Map2', {
-                      cafeId: 'cafe'+ this.state.nowCafeIdx,
+                      cafeId: this.state.nowCafe.id,
                       data: this.state.nowCafe,
                       image: this.state.imageUrl,
                       uid: this.state.uid,

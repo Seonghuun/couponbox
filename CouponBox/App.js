@@ -23,6 +23,7 @@ import CafeDataScreen from './src/cafedata';
 import GetCouponScreen from './src/getCoupon';
 import CouponListScreen from './src/couponList';
 import UsableCouponScreen from './src/usableCoupon';
+import SearchScreen from './src/searchtest';
 
 
 const Stack = createStackNavigator();
@@ -48,6 +49,7 @@ MapStack = () => {
       <Stack.Screen name = 'GetCoupon' component = {GetCouponScreen} options={{headerShown: false}}/>
       <Stack.Screen name = 'CouponList' component = {CouponListScreen} options={{headerShown: false}}/>
       <Stack.Screen name = 'UsableCoupon' component = {UsableCouponScreen} options={{headerShown: false}}/>
+      <Stack.Screen name = 'Search' component = {SearchScreen} options={{headerShown: false}}/>
     </Stack.Navigator>
   )
   
@@ -66,7 +68,7 @@ UserStack = () =>{
   return (
     <Stack.Navigator>
       <Stack.Screen name = 'User1' component = {TabUserScreen} options={{headerShown: false}}/>
-      <Stack.Screen name = 'EditProfile' component = {UserProfileScreen} options={{headerShown: false}}/>
+      <Stack.Screen name = 'EditProfile' component = {UserProfileScreen} options={{headerShown: false}}/>      
     </Stack.Navigator>
   )
 }

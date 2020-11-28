@@ -75,7 +75,11 @@ class TabUserScreen extends Component {
                     <TouchableOpacity style={styles.BtnTheme}>
                         <Text>즐겨찾는 카페</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.BtnTheme}>
+                    <TouchableOpacity style={styles.BtnTheme}
+                    onPress = {()=>{
+                        this.props.navigation.navigate('Search');
+                    }}
+                    >
                         <Text>쿠폰 내역</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.BtnTheme}

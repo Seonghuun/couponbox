@@ -20,6 +20,7 @@
     "@react-navigation/stack": "5.10.0",
     "react": "16.9.0",
     "react-native": "^0.63.3",
+    "react-native-autocomplete-input": "4.2.0",
     "react-native-elements": "3.0.0-alpha.1",
     "react-native-geolocation-service": "5.0.0",
     "react-native-gesture-handler": "1.8.0",

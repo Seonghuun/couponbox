@@ -5,8 +5,6 @@ import auth from "@react-native-firebase/auth"
 import firestore from "@react-native-firebase/firestore";
 import storage from '@react-native-firebase/storage';
 import Geolocation from 'react-native-geolocation-service';
-import searchImg from '../assets/images/searchBar.png'
-
 // 홈 탭 카페 리스트 띄우는 화면
 class TabHomeScreen extends Component {
     state = {
@@ -136,7 +134,7 @@ class TabHomeScreen extends Component {
                     <TouchableOpacity>
                         <Image
                         style={{height:80, width:'100%', alignItems:'center'}}
-                        source = {require('../assets/images/searchBar.png')}
+                        source = {require('../assets/images/searchbar.png')}
                         />
                     </TouchableOpacity>
                     {
