@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'reac
 import auth from "@react-native-firebase/auth"
 import firestore from "@react-native-firebase/firestore";
 
-
+// 유저 프로필 편집
 class UserProfileScreen extends Component {
 
     state = {
@@ -12,7 +12,9 @@ class UserProfileScreen extends Component {
         name : '',        
         phonenum : ''
     }
+
     addUser(uid, email) {
+        // 정보 입력하지 않았을 때
         if(!this.state.name){
             alert('이름을 입력해주세요');
             return;
@@ -21,6 +23,7 @@ class UserProfileScreen extends Component {
             alert('휴대폰 번호를 입력해주세요');
             return;
         }
+        // 입력한 정보 db에 반영하고 유저 탭 첫화면으로 이동
         firestore().
                     collection('userlist').doc(uid).
                     set({

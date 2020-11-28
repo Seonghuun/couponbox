@@ -8,7 +8,7 @@ import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
 
 
-
+// 내가 보유한 모든 쿠폰
 class AllCouponListScreen extends Component{
   state = {
     sliderState: {currentPage: 0},    
