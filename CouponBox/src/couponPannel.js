@@ -9,6 +9,7 @@ class CouponPannel extends Component{
 
     const stamp_bg_uri = "https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2Fbackground1.png?alt=media&token=eb316fbf-8c7a-4407-b309-8a70a946152f";
     const stamp_img_uri = "https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2F%EA%B7%B8%EB%A6%BC3.png?alt=media&token=19ad8f65-8f6a-432c-8e19-64214cafba3d";
+    
 
     return (
         <View style={{
