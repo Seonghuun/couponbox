@@ -14,7 +14,7 @@ class SearchScreen extends Component {
               onPress={(data, details = null) => {
                 
                 console.log(details);
-                this.props.navigation.navigate('Map1', {region:        {
+                this.props.navigation.navigate('Map1', {flg:1, region:        {
                   latitude: details.geometry.location.lat,
                   longitude: details.geometry.location.lng,
                   latitudeDelta: 0.0030,

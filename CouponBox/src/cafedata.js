@@ -64,7 +64,7 @@ class CafeDataScreen extends Component {
             <View style={styles.mainView}>
                 <Image
                     style={{height:300, width:350, alignItems:'center'}} 
-                    source={{uri: imageUrl}}
+                    source={{uri: imageUrl? imageUrl:null}}
                     resizeMode='contain'
                     
                 />

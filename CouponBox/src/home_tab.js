@@ -133,7 +133,7 @@ class TabHomeScreen extends Component {
                 <ScrollView style={styles.scrollView}>
                     <TouchableOpacity>
                         <Image
-                        style={{height:80, width:'100%', alignItems:'center'}}
+                        style={{alignItems:'center'}}
                         source = {require('../assets/images/searchbar.png')}
                         />
                     </TouchableOpacity>

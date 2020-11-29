@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { Component, useEffect, useRef } from 'react';
-import { View, Text, Image, PermissionsAndroid, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, PermissionsAndroid, TouchableOpacity, StyleSheet, YellowBox } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 // import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -8,6 +8,10 @@ import Modal from 'react-native-simple-modal';
 import firestore from "@react-native-firebase/firestore";
 import storage from '@react-native-firebase/storage';
 import auth from "@react-native-firebase/auth";
+
+YellowBox.ignoreWarnings([
+  'Animated: `useNativeDriver` was not specified.',
+]);
 
 /***************************** */
 /*  필수 사항
@@ -36,10 +40,9 @@ async function requestLocationPermission() {
 class TabMapScreen extends Component{
   state={
     uid: '',
-    query: '',
     visibleModal: null,
     region: {
-      latitude: 37.610,
+      latitude: 37.444,
       longitude: 126.996610,
       latitudeDelta: 0.006,
       longitudeDelta: 0.009
@@ -153,13 +156,28 @@ getImage(id) {
       console.log('getimage');
     }).catch((e)=>{
         // console.log(e)
-        this.setState({imageUrl:''})
+        console.log('no image');
     });
 }
 
 componentDidMount() {
   this._unsubscribe = this.props.navigation.addListener('focus', () => {
     requestLocationPermission();
+    const {params} = this.props.route;
+    const searchRegion = params ? params.region : null;
+    if(searchRegion!=null){
+      this.setState({
+        region: {
+          latitude: searchRegion.latitude,
+          longitude: searchRegion.longitude,
+          latitudeDelta: 0.0030,
+          longitudeDelta: 0.0040
+        }
+      });
+    }
+    
+    console.log(searchRegion);
+    
   });
 }
 
@@ -168,9 +186,8 @@ componentWillUnmount() {
 }
 
   render () {
-    const {params} = this.props.route;
-    const searchRegion = params ? params.region : null;
     
+    console.log('render');
     return (
       <View style={{flex:1}}>
         <TouchableOpacity
@@ -179,7 +196,7 @@ componentWillUnmount() {
           }
         >
           <Image
-            style={{height:60, alignItems:'center', resizeMode:'contain'}}
+            style={{resizeMode:'contain'}}
             source = {require('../assets/images/searchbar.png')}
           />
         </TouchableOpacity>
@@ -187,7 +204,7 @@ componentWillUnmount() {
             style={{flex:4}}
             provider={PROVIDER_GOOGLE}
             initialRegion={this.state.region}
-            region={searchRegion}
+            region={this.state.region}
             showsUserLocation={true}
             >
             {this.state.cafeInfo.map((item, index) => (
@@ -196,10 +213,17 @@ componentWillUnmount() {
                 coordinate={{ latitude : item.latitude ? item.latitude : 0, longitude: item.longitude ? item.longitude : 0 }}
                 TouchableOpacity onPress={() => 
                   {
+                    this.setState({
+                      region: {
+                      latitude : item.latitude,
+                      longitude : item.longitude,
+                      latitudeDelta: 0.0030,
+                      longitudeDelta: 0.0040
+                      }
+                    })
                     this.getImage(item.id);
                     console.log(item.id, item.name);
-                    this.setState({ open: true, nowCafe: item})
-                    
+                    this.setState({ open: true, nowCafe: item})                    
                   } 
                   }
               />
@@ -223,6 +247,7 @@ componentWillUnmount() {
               <View style={{flexDirection:'column'}}>
                 <TouchableOpacity
                   onPress={()=>{
+                    // searchRegion = null;
                     console.log('navigate to cafedata');
                     this.props.navigation.navigate('Map2', {
                       cafeId: this.state.nowCafe.id,
@@ -238,7 +263,7 @@ componentWillUnmount() {
 
               <Image
                     style={{height:80, width:80, marginRight:10}} 
-                    source={{uri: this.state.imageUrl}}
+                    source={{uri: this.state.imageUrl?this.state.imageUrl:null }}
               />
           </View>
         </Modal>
