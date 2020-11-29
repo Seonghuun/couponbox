@@ -162,23 +162,29 @@ getImage(id) {
 
 componentDidMount() {
   this._unsubscribe = this.props.navigation.addListener('focus', () => {
-    requestLocationPermission();
-    const {params} = this.props.route;
-    const searchRegion = params ? params.region : null;
-    if(searchRegion!=null){
-      this.setState({
-        region: {
-          latitude: searchRegion.latitude,
-          longitude: searchRegion.longitude,
-          latitudeDelta: 0.0030,
-          longitudeDelta: 0.0040
-        }
-      });
-    }
-    
-    console.log(searchRegion);
-    
+    requestLocationPermission();    
+    // console.log('didmount');
   });
+}
+
+// props가 변동이 있을때(ex. navigate시 param 넘겨줄때)
+componentDidUpdate(prevProps) {
+  // console.log('didupdate');
+  const {params} = this.props.route;
+  const searchRegion = params ? params.region : null;
+  const prevRegion = prevProps.route.params? prevProps.route.params.region : null;
+  console.log('현재 프롭', searchRegion);
+  console.log('이전 프롭', prevRegion);
+  if(searchRegion!=prevRegion){
+    this.setState({
+      region: {
+        latitude: searchRegion.latitude,
+        longitude: searchRegion.longitude,
+        latitudeDelta: 0.0030,
+        longitudeDelta: 0.0040
+      }
+    });
+  }
 }
 
 componentWillUnmount() {

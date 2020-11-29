@@ -14,21 +14,12 @@ class SearchScreen extends Component {
               onPress={(data, details = null) => {
                 
                 console.log(details);
-                this.props.navigation.navigate('Map1', {flg:1, region:        {
+                this.props.navigation.navigate('Map1', {region:        {
                   latitude: details.geometry.location.lat,
                   longitude: details.geometry.location.lng,
                   latitudeDelta: 0.0030,
                   longitudeDelta: 0.0040
                 }})
-                // 'details' is provided when fetchDetails = true
-                // this.setState({region: 
-                  // {
-                  //   latitude: details.geometry.location.lat,
-                  //   longitude: details.geometry.location.lng,
-                  //   latitudeDelta: 0.0030,
-                  //   longitudeDelta: 0.0040
-                  // }
-                // })
               }}
               query={{
                 key: 'AIzaSyAlKslfpnRohoHZfp2Og86p9ZgIe_6IK7E',
