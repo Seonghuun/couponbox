@@ -20,13 +20,11 @@ class CompleteCouponPan extends Component{
           
         <Text>카페 이름 : {couponData.cafeName}</Text>
         <Text>쿠폰 갯수 : {couponData.stampNum}</Text>
-        </View>
+        
         <ImageBackground
           source = {{uri: stamp_bg_uri }}
-          style={{width: 270, height:450, 
-            position: 'absolute',
-            top: 50, left: 70,
-            justifyContent: 'center', alignItems: 'center',}}
+          style={{width: 300, height:450, top: 100,
+            justifyContent: 'center', alignItems: 'center', backgroundColor:'white'}}
         >
           <View>
             <Button
@@ -43,6 +41,7 @@ class CompleteCouponPan extends Component{
           />
           </View>
         </ImageBackground>
+        </View>
       </>
       
     );

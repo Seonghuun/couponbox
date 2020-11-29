@@ -65,6 +65,10 @@ class CouponListScreen extends Component{
 
     return (
       <>
+      <ImageBackground
+          source={{uri:"https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2Fskin2%2Fbackground.png?alt=media&token=528c7040-94f3-4a98-8cea-fa54d94f9833"}}
+          style={{width:width, height:height, top:0, left:0, alignItems: 'center' }}
+          >
       <ScrollView
         style={{ flex: 1 }}
         horizontal={true}
@@ -78,7 +82,7 @@ class CouponListScreen extends Component{
 
         {
           [...Array(cPage)].map((n, index) => (
-            <View style={{ width, height }}>
+            <View style={{ width:width, height: height}}>
             <CompleteCouponPan
               param = {{cafeName: coupons[index].CafeName, stampNum: coupons[index].number}}
               goUsing = {gotoUsingCoupon}
@@ -89,7 +93,7 @@ class CouponListScreen extends Component{
 
         {
           [...Array(sPage)].map((n, index) => (
-            <View style={{ width, height }}>
+            <View style={{ width:width, height:height}}>
             <CouponPannel 
               param = {{cafeName: stamps[index].CafeName, stampNum: stamps[index].number}}
               />
@@ -98,11 +102,13 @@ class CouponListScreen extends Component{
         }
 
       </ScrollView>
+      
       <View style={styles.paginationWrapper}>
         {Array.from(Array(sPage+cPage).keys()).map((key, index) => (
           <View style={[styles.paginationDots, {opacity:pageIndex === index ? 1 : 0.2 }]} key={index} />
         ))}
       </View>
+      </ImageBackground>
       </>
     )
   }
