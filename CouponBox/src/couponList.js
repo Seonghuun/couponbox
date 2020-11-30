@@ -11,17 +11,75 @@ import firestore from "@react-native-firebase/firestore";
 class CouponListScreen extends Component{
   state = {
     sliderState: {currentPage: 0},    
-    chk: false
+    chk: false,
+    coupons: [],
+    stamps: [],
+    updated : false,
+  }
+
+  getStamp(uid, cafeId) {
+    const {coupons, stamps} = this.state;
+    coupons.splice(0, coupons.length); 
+    stamps.splice(0, stamps.length);
+    firestore().collection('userlist').doc(uid).collection('stamp').get().
+    then(querySnapshot=>{
+        console.log(querySnapshot.size); 
+        const tmp = new Object();    
+        querySnapshot.forEach(documentSnapshot => {
+            if (documentSnapshot.id == cafeId){
+                tmp.id = cafeId;
+                tmp.name = documentSnapshot.data().name;
+                tmp.num = documentSnapshot.data().number;                    
+            }            
+        })
+        console.log(tmp);
+        // const coupons = [];
+        // const stamps = [];
+
+        if(tmp.num >= 10){
+            const cNum = Math.floor(tmp.num/10);
+            console.log(cNum);
+            const sNum = tmp.num%10;
+            for (var i =0; i< cNum; i++){
+                coupons.push({CafeName:tmp.name, CafeID: tmp.id, number: 10});
+            }
+            if(sNum>0){
+                stamps.push({CafeName:tmp.name, CafeID: tmp.id, number:sNum});
+            }
+            
+        }
+        else{
+            if (tmp.num>0){
+                stamps.push({CafeName:tmp.name, CafeID: tmp.id, number:tmp.num});
+            }
+            
+        }
+        this.setState({updated:true});
+
+        
+        // this.props.navigation.navigate('CouponList', {uid:uid, coupons: coupons, stamps:stamps});
+        
+
+    })
   }
 
   componentDidMount() {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
-      //alert("hello");
+      this.getStamp(this.props.route.params.uid, this.props.route.params.cafeId)
     });
   }
 
   componentWillUnmount() {
     this._unsubscribe();
+  }
+
+  constructor(props) {
+    super(props);
+    const {params} = this.props.route;
+    const uid = params ? params.uid : null;
+    const cafeId = params ? params.cafeId : null;
+    console.log(uid, cafeId);
+    this.getStamp(uid, cafeId);
   }
 
 
@@ -30,14 +88,14 @@ class CouponListScreen extends Component{
     //인자로 받아오는 부분
     const {params} = this.props.route;
     const db = firestore();
-    const userUID = params ? params.uid : null;
-    const coupons = params ? params.coupons : null;
-    const stamps = params ? params.stamps : null;
-    const sPage = stamps.length;
-    const cPage = coupons.length;
+    // const userUID = params ? params.uid : null;
+    // const coupons = params ? params.coupons : null;
+    // const stamps = params ? params.stamps : null;
+    const sPage = this.state.stamps.length;
+    const cPage = this.state.coupons.length;
 
 
-    console.log(stamps);
+    // console.log(stamps);
 
 
     const gotoUsingCoupon = () => {
@@ -84,7 +142,7 @@ class CouponListScreen extends Component{
           [...Array(cPage)].map((n, index) => (
             <View style={{ width:width, height: height}}>
             <CompleteCouponPan
-              param = {{cafeName: coupons[index].CafeName, stampNum: coupons[index].number}}
+              param = {{cafeName: this.state.coupons[index].CafeName, stampNum: this.state.coupons[index].number}}
               goUsing = {gotoUsingCoupon}
             />
             </View>
@@ -95,7 +153,7 @@ class CouponListScreen extends Component{
           [...Array(sPage)].map((n, index) => (
             <View style={{ width:width, height:height}}>
             <CouponPannel 
-              param = {{cafeName: stamps[index].CafeName, stampNum: stamps[index].number}}
+              param = {{cafeName: this.state.stamps[index].CafeName, stampNum: this.state.stamps[index].number}}
               />
             </View>
           ))

@@ -7,48 +7,6 @@ import storage from '@react-native-firebase/storage';
 import logo from '../assets/images/logo.png';
 
 class CafeDataScreen extends Component {
-
-    getStamp(uid, cafeId) {
-        firestore().collection('userlist').doc(uid).collection('stamp').get().
-        then(querySnapshot=>{
-            console.log(querySnapshot.size); 
-            const tmp = new Object();    
-            querySnapshot.forEach(documentSnapshot => {
-                if (documentSnapshot.id == cafeId){
-                    tmp.id = cafeId;
-                    tmp.name = documentSnapshot.data().name;
-                    tmp.num = documentSnapshot.data().number;                    
-                }            
-            })
-            console.log(tmp);
-            const coupons = [];
-            const stamps = [];
-
-            if(tmp.num >= 10){
-                const cNum = Math.floor(tmp.num/10);
-                console.log(cNum);
-                const sNum = tmp.num%10;
-                for (var i =0; i< cNum; i++){
-                    coupons.push({CafeName:tmp.name, CafeID: tmp.id, number: 10});
-                }
-                if(sNum>0){
-                    stamps.push({CafeName:tmp.name, CafeID: tmp.id, number:sNum});
-                }
-                
-            }
-            else{
-                if (tmp.num>0){
-                    stamps.push({CafeName:tmp.name, CafeID: tmp.id, number:tmp.num});
-                }
-                
-            }
-
-            
-            this.props.navigation.navigate('CouponList', {uid:uid, coupons: coupons, stamps:stamps});
-            
-
-        })
-      }
         
     render () {
         const {params} = this.props.route;
@@ -93,7 +51,7 @@ class CafeDataScreen extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity style = {styles.caffeBtn}
                 onPress={()=>{
-                    this.getStamp(uid, cafeId);
+                    this.props.navigation.navigate('CouponList', {uid:uid, cafeId: cafeId, data:data});
                 }}
                 >
                     <Text>쿠폰 사용</Text>

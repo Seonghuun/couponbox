@@ -64,6 +64,7 @@ class AllCouponListScreen extends Component{
   componentDidMount() {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       //alert("hello");
+      this.getUserCoupon();
     });
   }
 
