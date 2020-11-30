@@ -19,8 +19,7 @@ class CouponListScreen extends Component{
 
   getStamp(uid, cafeId) {
     const {coupons, stamps} = this.state;
-    coupons.splice(0, coupons.length); 
-    stamps.splice(0, stamps.length);
+    
     firestore().collection('userlist').doc(uid).collection('stamp').get().
     then(querySnapshot=>{
         console.log(querySnapshot.size); 
@@ -32,10 +31,9 @@ class CouponListScreen extends Component{
                 tmp.num = documentSnapshot.data().number;                    
             }            
         })
-        console.log(tmp);
-        // const coupons = [];
-        // const stamps = [];
-
+        console.log('tmp',tmp);
+        coupons.splice(0, coupons.length); 
+        stamps.splice(0, stamps.length);
         if(tmp.num >= 10){
             const cNum = Math.floor(tmp.num/10);
             console.log(cNum);
@@ -55,9 +53,6 @@ class CouponListScreen extends Component{
             
         }
         this.setState({updated:true});
-
-        
-        // this.props.navigation.navigate('CouponList', {uid:uid, coupons: coupons, stamps:stamps});
         
 
     })
@@ -93,6 +88,7 @@ class CouponListScreen extends Component{
     // const stamps = params ? params.stamps : null;
     const sPage = this.state.stamps.length;
     const cPage = this.state.coupons.length;
+    console.log(this.state.stamps);
 
 
     // console.log(stamps);
