@@ -79,6 +79,8 @@ class AllCouponListScreen extends Component{
 
 
   render () {
+    const sPage = this.state.stamps.length;
+    const cPage = this.state.coupons.length;
 
     const gotoUsingCoupon = () => {
       this.props.navigation.navigate('UsableCoupon', {uid:this.state.uid})
@@ -105,6 +107,10 @@ class AllCouponListScreen extends Component{
 
     return (
       <>
+      <ImageBackground
+          source={{uri:"https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2Fskin2%2Fbackground.png?alt=media&token=528c7040-94f3-4a98-8cea-fa54d94f9833"}}
+          style={{width:width, height:height, top:0, left:0, alignItems: 'center' }}
+          >
       <ScrollView
         style={{ flex: 1 }}
         horizontal={true}
@@ -116,30 +122,31 @@ class AllCouponListScreen extends Component{
         }}
       >
         {
-          this.state.coupons.map((item, index) => (
-            <View style={{ width, height }}>
+          [...Array(cPage)].map((n, index) => (
+            <View style={{ width:width, height: height}}>
             <CompleteCouponPan
-              param = {{cafeName: item.CafeName, stampNum: item.number}}
+              param = {{cafeName: this.state.coupons[index].CafeName, stampNum: this.state.coupons[index].number}}
               goUsing = {gotoUsingCoupon}
             />
             </View>
           ))
         }
         {
-          this.state.stamps.map((item, index) => (
-            <View style={{ width, height }}>
+          [...Array(sPage)].map((n, index) => (
+            <View style={{ width:width, height:height}}>
             <CouponPannel 
-              param = {{cafeName: item.CafeName, stampNum: item.number}}
+              param = {{cafeName: this.state.stamps[index].CafeName, stampNum: this.state.stamps[index].number}}
               />
             </View>
           ))
         }
       </ScrollView>
       <View style={styles.paginationWrapper}>
-        {Array.from(Array(this.state.sPage+this.state.cPage).keys()).map((key, index) => (
+        {Array.from(Array(sPage+cPage).keys()).map((key, index) => (
           <View style={[styles.paginationDots, {opacity:pageIndex === index ? 1 : 0.2 }]} key={index} />
         ))}
       </View>
+      </ImageBackground>
       </>
     )
   }

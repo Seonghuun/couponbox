@@ -81,11 +81,6 @@ class CouponListScreen extends Component{
   render () {
 
     //인자로 받아오는 부분
-    const {params} = this.props.route;
-    const db = firestore();
-    // const userUID = params ? params.uid : null;
-    // const coupons = params ? params.coupons : null;
-    // const stamps = params ? params.stamps : null;
     const sPage = this.state.stamps.length;
     const cPage = this.state.coupons.length;
     console.log(this.state.stamps);
