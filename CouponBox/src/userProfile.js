@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
 import auth from "@react-native-firebase/auth"
 import firestore from "@react-native-firebase/firestore";
+import ImagePicker from 'react-native-image-picker';
+import storage from '@react-native-firebase/storage';
 
 // 유저 프로필 편집
 class UserProfileScreen extends Component {
@@ -10,7 +12,42 @@ class UserProfileScreen extends Component {
     state = {
         uid : '',
         name : '',        
-        phonenum : ''
+        phonenum : '',
+        image: '',
+    }
+
+    getImage(uid) {
+        // 일단 로고만 불러옴
+        let imageRef = storage().ref('userImages/'+uid);
+        
+        imageRef.getDownloadURL()
+        .then((url) => {
+            // 카페 아이디, 정보, UID, 이미지 URL 과 함께 카페데이터 화면으로 이동
+            this.setState({image: url});
+        }).catch((e)=>{
+            // 이미지 URL을 불러오지 못해서 제외하고 카페데이터 화면으로 이동
+            console.log(e)
+        });
+    }
+
+    addImage(id) {
+        ImagePicker.launchImageLibrary({}, response=>{ // showImagePicker : 사진 찍거나, 사진첩에서 불러옴
+            console.log(response.path)
+            console.log(response.path.split('.')[1])
+            this.setState({
+                image: response.uri
+            })
+            this.uploadImage(id, response.path)
+            // this.uploadImage(id, response.uri);
+        })
+    }
+
+    uploadImage(id, path) {
+        let imageRef = storage().ref('userImages/'+id);
+        imageRef.putFile(path).then((snapshot)=>{
+            console.log('upload success')
+
+        })
     }
 
     addUser(uid, email) {
@@ -37,6 +74,13 @@ class UserProfileScreen extends Component {
                     });
     }
 
+    constructor(props) {
+        super(props);
+        const {params} = this.props.route;
+        const uid = params ? params.uid : null;
+        this.getImage(uid);
+    }
+
 
     render() {
         const {params} = this.props.route;
@@ -45,14 +89,14 @@ class UserProfileScreen extends Component {
         return (
             <View style={styles.mainView}>
                 <Image
-                source={require('../assets/images/userImage.jpg')}
+                source={{uri: this.state.image}}
                 style={{width:90, height: 90, borderRadius: 80 /2}}
                 />
                 <TouchableOpacity
                 style={{marginTop:10, marginBottom:30}}
-                    // onPress={()=>{
-                        
-                    // }}
+                    onPress={()=>{
+                        this.addImage(uid);
+                    }}
                 >
                     <Text style={{color:'blue', fontWeight:'bold'}}>프로필 사진 바꾸기</Text>
                 </TouchableOpacity>

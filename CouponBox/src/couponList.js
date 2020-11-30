@@ -115,7 +115,7 @@ class CouponListScreen extends Component{
     return (
       <>
       <ImageBackground
-          source={{uri:"https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2Fskin2%2Fbackground.png?alt=media&token=528c7040-94f3-4a98-8cea-fa54d94f9833"}}
+          source={{uri:"https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2Fskin3%2Fbackground3.png?alt=media&token=b1a84dd1-fadc-4248-afbc-0a3d24cd8f0d"}}
           style={{width:width, height:height, top:0, left:0, alignItems: 'center' }}
           >
       <ScrollView

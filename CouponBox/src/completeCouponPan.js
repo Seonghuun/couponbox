@@ -7,7 +7,7 @@ class CompleteCouponPan extends Component{
   render () {
     const couponData = this.props.param;
 
-    const stamp_bg_uri = "https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2Fbackground1.png?alt=media&token=eb316fbf-8c7a-4407-b309-8a70a946152f";
+    const stamp_bg_uri = "https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2Fskin3%2Fpan3.png?alt=media&token=0b4a27f2-f4b9-4df1-9165-516d1d6bc6f6";
 
     const goUsing = this.props.goUsing;
 

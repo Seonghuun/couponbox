@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
+import storage from '@react-native-firebase/storage';
 
 
 class TabUserScreen extends Component {
@@ -9,7 +10,8 @@ class TabUserScreen extends Component {
         myUID : "",
         myEmail: "",
         myName: "",
-        myNum: ""
+        myNum: "",
+        image: ""
     }
     // 로그인 상태 체크하고 유저 정보 state에 저장
     checkLogin() {
@@ -18,6 +20,7 @@ class TabUserScreen extends Component {
                 console.log('usertab');
                 this.setState({myUID:user.uid});
                 this.setState({myEmail:user.email});
+                this.getImage(user.uid);
                 firestore().collection('userlist').doc(user.uid)
                 .onSnapshot(dss=>{
                     this.setState({myName: dss.data().name})
@@ -37,6 +40,20 @@ class TabUserScreen extends Component {
             console.log('User signed out');
             this.props.navigation.navigate('Login'); 
         })       
+    }
+
+    getImage(uid) {
+        // 일단 로고만 불러옴
+        let imageRef = storage().ref('userImages/'+uid);
+        
+        imageRef.getDownloadURL()
+        .then((url) => {
+            // 카페 아이디, 정보, UID, 이미지 URL 과 함께 카페데이터 화면으로 이동
+            this.setState({image: url});
+        }).catch((e)=>{
+            // 이미지 URL을 불러오지 못해서 제외하고 카페데이터 화면으로 이동
+            console.log(e)
+        });
     }
     
     constructor(props) {
@@ -59,7 +76,7 @@ class TabUserScreen extends Component {
             <View style={styles.container}>            
                 <View style={styles.topView}>
                     <Image
-                        source={require('../assets/images/userImage.jpg')}
+                        source={{uri: this.state.image}}
                         style={{width:80, height: 80, borderRadius: 80 /2}}
                         
                     />
