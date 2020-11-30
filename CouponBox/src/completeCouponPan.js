@@ -18,8 +18,8 @@ class CompleteCouponPan extends Component{
             alignItems: 'center',
         }}>
           
-        <Text>카페 이름 : {couponData.cafeName}</Text>
-        <Text>쿠폰 갯수 : {couponData.stampNum}</Text>
+        <Text>{couponData.cafeName}</Text>
+        {/* <Text>쿠폰 갯수 : {couponData.stampNum}</Text> */}
         
         <ImageBackground
           source = {{uri: stamp_bg_uri }}

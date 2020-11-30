@@ -138,9 +138,10 @@ class CouponListScreen extends Component{
             />
             </View>
           ))
+
         }
 
-        {
+        {(this.state.stamps.length>0)?
           [...Array(sPage)].map((n, index) => (
             <View style={{ width:width, height:height}}>
             <CouponPannel 
@@ -148,6 +149,13 @@ class CouponListScreen extends Component{
               />
             </View>
           ))
+          :
+          <Image
+            style={{top: 250,left:-90,height:400, width:600, alignItems:'center'}} 
+            source={{uri: 'https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2Fskin3%2FnoStamp.png?alt=media&token=47654298-0eed-4943-9178-0f8a21443930'}}
+            resizeMode='contain'
+                    
+          />
         }
 
       </ScrollView>
