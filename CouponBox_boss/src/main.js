@@ -109,6 +109,9 @@ componentWillUnmount() {
     
     return (
       <View>
+        <Text style={{padding:20, fontSize:25}}>
+          My Cafe List
+        </Text>
         {
           this.state.cafeInfo.map((item, idx)=>(
             <Button

@@ -49,7 +49,7 @@ class RegisterCafeSceen extends Component {
 
     //카페 추가하는 부분
     async addCafe(id) {
-        this.toGeocode(this.state.address);
+        await this.toGeocode(this.state.address);
         if(this.state.longitude===0){
             alert('다시 시도해 주십시오.');
         }
