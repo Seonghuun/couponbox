@@ -79,7 +79,9 @@ class CouponListScreen extends Component{
 
 
   render () {
-
+    
+    const {params} = this.props.route;
+    const uid = params ? params.uid : null;
     //인자로 받아오는 부분
     const sPage = this.state.stamps.length;
     const cPage = this.state.coupons.length;
@@ -90,7 +92,7 @@ class CouponListScreen extends Component{
 
 
     const gotoUsingCoupon = () => {
-      this.props.navigation.navigate('UsableCoupon', {uid:userUID})
+      this.props.navigation.navigate('UsableCoupon', {uid:uid})
     }
 
     // 쿠폰함 슬라이드 부분
