@@ -14,7 +14,7 @@ class CafeDataScreen extends Component {
         const data = params ? params.data : null;
         const uid = params ? params.uid : null;
         const imageUrl = params ? params.image : null;
-        console.log(cafeId);
+        console.log(uid);
         
         
         return (
