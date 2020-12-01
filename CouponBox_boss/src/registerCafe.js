@@ -104,6 +104,11 @@ class RegisterCafeSceen extends Component {
         // console.log(uid);
         return (
             <View style={styles.mainView}>
+              <Text
+                style={{fontSize:20, padding:30}}
+              >
+                카페 등록
+              </Text>
                 <View style={styles.inputView}>
                     <TextInput
                         value={this.state.caffe_name}
@@ -144,10 +149,10 @@ class RegisterCafeSceen extends Component {
                         editable={true}
                     />
                 </View>
-                <View style={styles.inputView2}>
+                <View style={styles.inputView}>
                     <TextInput
                         value={this.state.zonecode}
-                        style={styles.input}
+                        style={styles.input2}
                         placeholder="우편번호" 
                         placeholderTextColor="#003f5c"
                         onChangeText={text=>this.setState({zonecode:text})}
@@ -156,14 +161,18 @@ class RegisterCafeSceen extends Component {
                         autoCapitalize={'none'} //대문자 자동수정 안함
                         editable={true}
                     />
-                </View>
-                <Button title="주소찾기"
+                    <TouchableOpacity
+                    style={styles.zoneNum}
                     onPress={()=>{
                         this.props.navigation.navigate('findAddr',{
                             onGoBack: (dData) => this.getAddr(dData),
                         });
                       }}
-                />
+                    >
+                      <Text style={{color:'white'}}>주소찾기</Text>
+                    </TouchableOpacity>
+                </View>
+                
                 <View style={styles.inputView}>
                     <TextInput
                         value={this.state.address}
@@ -200,6 +209,16 @@ class RegisterCafeSceen extends Component {
                 >
                     <Text style={styles.loginText}>등록</Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.cancelBtn}
+                    onPress={()=>{
+                        this.props.navigation.goBack();
+                        
+                        // this.setState({updated:"true"})
+                    }}
+                >
+                    <Text style={styles.loginText}>취소</Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -222,6 +241,26 @@ const styles = StyleSheet.create({
       fontSize: 15,
       padding: 10
     },
+    input2: { //우편번호
+      width: '65%',
+      height: 45,
+      backgroundColor: '#f2f2f2',
+      top:39,
+      fontSize: 15,
+      padding: 10
+    },
+    zoneNum: { //주소찾기 버튼
+      width:"40%",
+      backgroundColor:"#F7819F",
+      borderRadius:25,
+      height:38,
+      alignItems:"center",
+      justifyContent:"center",
+      marginTop:20,
+      marginBottom:20,
+      top:-22.5,
+      left:152,
+    },
     image: {
       width: '85%',
       height: 300
@@ -234,18 +273,18 @@ const styles = StyleSheet.create({
       marginTop: 10,
       marginBottom:10,
       justifyContent:"center",
-      padding:20
+      padding:20,
+      elevation:5,
     },
     inputView2:{
-        width:"45%",
+        width:"65%",
         backgroundColor:"#f2f2f2",
         borderRadius:25,
         height:45,
         marginTop: 10,
-        left: -40,
         marginBottom:10,
-        justifyContent:"center",
-        padding:20
+        padding:20,
+        
       },
     loginBtn:{
       width:"65%",
@@ -255,7 +294,19 @@ const styles = StyleSheet.create({
       alignItems:"center",
       justifyContent:"center",
       marginTop:20,
-      marginBottom:20
+      marginBottom:20,
+      elevation:5,
+    },
+    cancelBtn:{
+      width:"65%",
+      backgroundColor:"#FFFFFF",
+      borderRadius:25,
+      height:50,
+      alignItems:"center",
+      justifyContent:"center",
+      marginTop:0,
+      marginBottom:20,
+      elevation:1,
     }
       
   })

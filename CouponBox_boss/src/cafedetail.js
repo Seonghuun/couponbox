@@ -15,12 +15,17 @@ class CafeDetailScreen extends Component {
     }
     addImage(id) {
         ImagePicker.launchImageLibrary({}, response=>{ // showImagePicker : 사진 찍거나, 사진첩에서 불러옴
-            console.log(response.path)
-            console.log(response.path.split('.')[1])
-            this.setState({
-                avatar: response.uri
-            })
-            this.uploadImage(id, response.path)
+            try{
+                console.log(response.path)
+                console.log(response.path.split('.')[1])
+                this.setState({
+                    avatar: response.uri
+                })
+                this.uploadImage(id, response.path)
+            } catch(error){
+                
+            }
+            
             // this.uploadImage(id, response.uri);
         })
     }
@@ -85,6 +90,14 @@ class CafeDetailScreen extends Component {
                     }}
                 >
                     <Text style={styles.loginText}>발급 이력 확인</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.loginBtn}
+                    onPress={()=>{
+                        this.props.navigation.goBack();
+                    }}
+                >
+                    <Text style={styles.loginText}>메인 메뉴</Text>
                 </TouchableOpacity>  
             </View>
         )
@@ -124,7 +137,8 @@ const styles = StyleSheet.create({
       marginTop: 10,
       marginBottom:10,
       justifyContent:"center",
-      padding:20
+      padding:20,
+      elevation: 5,
     },
     
     loginBtn:{
@@ -135,7 +149,8 @@ const styles = StyleSheet.create({
       alignItems:"center",
       justifyContent:"center",
       marginTop:20,
-      marginBottom:20
+      marginBottom:20,
+      elevation: 5,
     }
       
   })

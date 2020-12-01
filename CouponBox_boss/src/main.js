@@ -9,7 +9,7 @@
 import 'react-native-gesture-handler';
 import {ButtonGroup} from 'react-native-elements';
 import React, {Component} from 'react'; 
-import { Image, View, Text, FlatList, Button } from 'react-native';
+import { Image, View, Text, FlatList, Button,StyleSheet, TouchableOpacity } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
@@ -108,24 +108,23 @@ componentWillUnmount() {
 
     
     return (
-      <View>
-        <Text style={{padding:20, fontSize:25}}>
+      <View style={{alignItems:'center'}}>
+        <Text style={{padding:40, fontSize:20, alignSelf:'center'}}>
           My Cafe List
         </Text>
         {
           this.state.cafeInfo.map((item, idx)=>(
-            <Button
-              key={idx}
-              title={item.name}
+            <TouchableOpacity
+              style={styles.cafeBtn}
               onPress={()=>{
                 this.getImage(idx);
-              //   this.props.navigation.navigate('Detail', {
-              //     cafeId: this.state.cafeList[idx],
-              //     data: this.state.cafeInfo[idx],
-                  
-              // })
               }}
-            />
+            >
+              <Text>
+              {item.name}
+              </Text>
+            </TouchableOpacity>
+            
           ))
         }
         
@@ -133,22 +132,50 @@ componentWillUnmount() {
                     onPress={()=>{
                         this.getUid()                       
                       }}/> */}
-                <Button
-                    title="카페 등록"
-                    onPress={()=>{
-                      this.props.navigation.navigate('Register', {
-                        uid: this.state.uid
-                      });
-                    }}    
-                />
+
+            <TouchableOpacity
+              style={styles.regBtn}
+                onPress={()=>{
+                  this.props.navigation.navigate('Register', {
+                    uid: this.state.uid
+                  });
+                }}
+            >
+              <Text>
+                카페 등록
+              </Text>
+            </TouchableOpacity>
                 
             </View>
-      
-     
-     
       
     )
   }
 }
+
+const styles = StyleSheet.create({
+  cafeBtn:{
+    width:"65%",
+    backgroundColor:"#E6E6E6",
+    borderRadius:25,
+    height:50,
+    alignItems:"center",
+    justifyContent:"center",
+    marginTop:10,
+    marginBottom:10,
+    elevation: 5,
+  },
+  regBtn:{
+    width:"65%",
+    backgroundColor:"#fb5b5a",
+    borderRadius:25,
+    height:50,
+    alignItems:"center",
+    justifyContent:"center",
+    marginTop:10,
+    marginBottom:10,
+    elevation: 5,
+  }
+  
+})
 
 export default Main;
