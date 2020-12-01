@@ -191,7 +191,9 @@ const styles = StyleSheet.create({
       marginTop: 10,
       marginBottom:10,
       justifyContent:"center",
-      padding:20
+      padding:20,
+      
+      elevation: 5
     },
     
     loginBtn:{
@@ -202,7 +204,9 @@ const styles = StyleSheet.create({
       alignItems:"center",
       justifyContent:"center",
       marginTop:20,
-      marginBottom:10
+      marginBottom:10,
+      
+      elevation: 5
     },
     cancelBtn:{
         width:"65%",
@@ -212,7 +216,8 @@ const styles = StyleSheet.create({
         alignItems:"center",
         justifyContent:"center",
         marginTop:10,
-        marginBottom:10
+        marginBottom:10,
+        elevation: 5
       }
       
   })

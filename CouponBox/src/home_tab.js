@@ -117,15 +117,15 @@ class TabHomeScreen extends Component {
         this.getUid();
     }
 
-    // componentDidMount() {
-    //     this._unsubscribe = this.props.navigation.addListener('focus', () => {
-    //         this.getcafeLists();
-    //     });
-    //   }
+    componentDidMount() {
+        this._unsubscribe = this.props.navigation.addListener('focus', () => {
+            this.getcafeLists();
+        });
+      }
       
-    //   componentWillUnmount() {
-    //     this._unsubscribe();
-    //   }
+      componentWillUnmount() {
+        this._unsubscribe();
+      }
 
     render () {
         
@@ -173,7 +173,8 @@ const styles = StyleSheet.create({
       height:50,
       alignItems:"center",
       justifyContent:"center",
-      marginBottom:10
+      marginBottom:10,
+      elevation: 5
     }
       
   })

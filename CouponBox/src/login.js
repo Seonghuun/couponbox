@@ -148,7 +148,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom:10,
     justifyContent:"center",
-    padding:20
+    padding:20,
+    elevation: 5
   },
   
   loginBtn:{
@@ -159,7 +160,8 @@ const styles = StyleSheet.create({
     alignItems:"center",
     justifyContent:"center",
     marginTop:10,
-    marginBottom:20
+    marginBottom:20,
+    elevation: 5
   }
     
 })

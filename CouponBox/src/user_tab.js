@@ -80,7 +80,7 @@ class TabUserScreen extends Component {
                         style={{width:80, height: 80, borderRadius: 80 /2}}
                         
                     />
-                    <View style={{marginHorizontal: 30, flexDirection:'column'}}>
+                    <View style={{marginHorizontal: 7, flexDirection:'column'}}>
                     <Text style={styles.baseText}>이메일: {this.state.myEmail}</Text>
                     <Text style={styles.baseText}>이름:   {this.state.myName}</Text>
                     <Text style={styles.baseText}>번호:   {this.state.myNum}</Text>
@@ -93,9 +93,9 @@ class TabUserScreen extends Component {
                         <Text>즐겨찾는 카페</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.BtnTheme}
-                    onPress = {()=>{
-                        this.props.navigation.navigate('Search');
-                    }}
+                    // onPress = {()=>{
+                    //     this.props.navigation.navigate('Search');
+                    // }}
                     >
                         <Text>쿠폰 내역</Text>
                     </TouchableOpacity>

@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     height: 10,
     width: 10,
     borderRadius: 10 / 2,
-    backgroundColor: '#0898A0',
+    backgroundColor: 'black',
     marginLeft: 10,
   },
 });

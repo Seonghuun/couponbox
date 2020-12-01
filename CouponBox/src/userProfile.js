@@ -31,15 +31,20 @@ class UserProfileScreen extends Component {
     }
 
     addImage(id) {
-        ImagePicker.launchImageLibrary({}, response=>{ // showImagePicker : 사진 찍거나, 사진첩에서 불러옴
-            console.log(response.path)
-            console.log(response.path.split('.')[1])
-            this.setState({
-                image: response.uri
+        try{
+            ImagePicker.launchImageLibrary({}, response=>{ // showImagePicker : 사진 찍거나, 사진첩에서 불러옴
+                console.log(response.path)
+                console.log(response.path.split('.')[1])
+                this.setState({
+                    image: response.uri
+                })
+                this.uploadImage(id, response.path)
+                // this.uploadImage(id, response.uri);
             })
-            this.uploadImage(id, response.path)
-            // this.uploadImage(id, response.uri);
-        })
+        }catch{
+            console.log('error');
+        }
+        
     }
 
     uploadImage(id, path) {
