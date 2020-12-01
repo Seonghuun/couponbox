@@ -84,16 +84,16 @@ class LoginScreen extends Component { //컴포넌트 상속하는 앱
           <Text style={styles.loginText}>Log in</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          style={styles.signBtn}
              onPress={()=>{
                 this.props.navigation.navigate('Signup')
             }}
         >
-          <Text style={styles.loginText}>Sign up</Text>
+          <Text>Sign up</Text>
         </TouchableOpacity>       
         
 
       </View>
-      
       
     )
   }
@@ -128,7 +128,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom:10,
     justifyContent:"center",
-    padding:20
+    padding:20,
+    top:20,
+    elevation: 5,
   },
   
   loginBtn:{
@@ -139,9 +141,21 @@ const styles = StyleSheet.create({
     alignItems:"center",
     justifyContent:"center",
     marginTop:10,
-    marginBottom:20
-  }
-    
+    marginBottom:20,
+    top:20,
+    elevation: 5,
+  },
+  signBtn:{
+    width:"65%",
+    backgroundColor:"#FFFFFF",
+    borderRadius:25,
+    height:50,
+    alignItems:"center",
+    justifyContent:"center",
+    marginTop:0,
+    marginBottom:20,
+    top:10,
+  },
 })
 
 
