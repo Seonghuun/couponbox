@@ -34,6 +34,10 @@ class UserProfileScreen extends Component {
         try{
             ImagePicker.launchImageLibrary({}, response=>{ // showImagePicker : 사진 찍거나, 사진첩에서 불러옴
                 console.log(response.path)
+                if(response.path==undefined){
+                    console.log('error');
+                    return;
+                }
                 console.log(response.path.split('.')[1])
                 this.setState({
                     image: response.uri

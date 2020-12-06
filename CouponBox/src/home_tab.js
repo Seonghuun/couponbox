@@ -133,7 +133,7 @@ class TabHomeScreen extends Component {
                 <ScrollView style={styles.scrollView}>
                     <TouchableOpacity>
                         <Image
-                        style={{alignItems:'center'}}
+                        style={{alignItems:'center', marginBottom: 20}}
                         source = {require('../assets/images/searchbar.png')}
                         />
                     </TouchableOpacity>
@@ -167,13 +167,14 @@ const styles = StyleSheet.create({
     },
     
     caffeBtn:{
-      width:"100%",
-      backgroundColor:"#E6E6E6",
+      width:"80%",
+      backgroundColor:"#f2f2f2",
       borderRadius:25,
-      height:50,
+      height:40,
       alignItems:"center",
       justifyContent:"center",
-      marginBottom:10,
+      marginLeft: 37,
+      marginBottom:15,
       elevation: 5
     }
       

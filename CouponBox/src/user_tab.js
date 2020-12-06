@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     baseText: {
         // fontFamily: "Cochin",
         marginBottom: 5,
-        fontSize: 18
+        fontSize: 15
 
     },
     
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
       width:"90%",
       backgroundColor:"#F2F2F2",
       borderRadius:25,
-      height:85,
+      height:50,
       alignItems:"center",
       justifyContent:"center",
       marginTop:15,
