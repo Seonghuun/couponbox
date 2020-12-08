@@ -50,9 +50,10 @@ class TabUserScreen extends Component {
         .then((url) => {
             // 카페 아이디, 정보, UID, 이미지 URL 과 함께 카페데이터 화면으로 이동
             this.setState({image: url});
+            console.log('image success');
         }).catch((e)=>{
             // 이미지 URL을 불러오지 못해서 제외하고 카페데이터 화면으로 이동
-            console.log(e)
+            console.log(e);
         });
     }
     
