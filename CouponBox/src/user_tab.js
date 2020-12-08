@@ -76,14 +76,14 @@ class TabUserScreen extends Component {
             <View style={styles.container}>            
                 <View style={styles.topView}>
                     <Image
-                        source={{uri: this.state.image}}
+                        source={{uri: this.state.image ? this.state.image: null}}
                         style={{width:80, height: 80, borderRadius: 80 /2}}
                         
                     />
                     <View style={{marginHorizontal: 7, flexDirection:'column'}}>
-                    <Text style={styles.baseText}>이메일: {this.state.myEmail}</Text>
-                    <Text style={styles.baseText}>이름:   {this.state.myName}</Text>
-                    <Text style={styles.baseText}>번호:   {this.state.myNum}</Text>
+                    <Text style={styles.baseText}>이메일:   {this.state.myEmail}</Text>
+                    <Text style={styles.baseText}>이름:      {this.state.myName}</Text>
+                    <Text style={styles.baseText}>번호:      {this.state.myNum}</Text>
                     </View>
                     
                 
@@ -101,7 +101,7 @@ class TabUserScreen extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.BtnTheme}
                     onPress = {()=>{
-                        this.props.navigation.navigate('EditProfile', {uid:this.state.myUID, email:this.state.myEmail});
+                        this.props.navigation.navigate('EditProfile', {uid:this.state.myUID, email:this.state.myEmail, name:this.state.myName, num:this.state.myNum});
                     }}
                     >
                         <Text>프로필 편집</Text>

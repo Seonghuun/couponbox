@@ -23,7 +23,7 @@ class SearchScreen extends Component {
               }}
               query={{
                 key: 'AIzaSyAlKslfpnRohoHZfp2Og86p9ZgIe_6IK7E',
-                language: 'kr',
+                language: 'korean',
               }}
               predefinedPlaces={mapList}
               predefinedPlacesAlwaysVisible={true}

@@ -123,7 +123,7 @@ class AllCouponListScreen extends Component{
       >
         {
           [...Array(cPage)].map((n, index) => (
-            <View style={{ width:width, height: height}}>
+            <View style={{ width:width, height: height}} key={index}>
             <CompleteCouponPan
               param = {{cafeName: this.state.coupons[index].CafeName, stampNum: this.state.coupons[index].number}}
               goUsing = {gotoUsingCoupon}
@@ -133,7 +133,7 @@ class AllCouponListScreen extends Component{
         }
         {
           [...Array(sPage)].map((n, index) => (
-            <View style={{ width:width, height:height}}>
+            <View style={{ width:width, height:height}} key={index}>
             <CouponPannel 
               param = {{cafeName: this.state.stamps[index].CafeName, stampNum: this.state.stamps[index].number}}
               />

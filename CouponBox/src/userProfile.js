@@ -11,8 +11,6 @@ class UserProfileScreen extends Component {
 
     state = {
         uid : '',
-        name : '',        
-        phonenum : '',
         image: '',
     }
 
@@ -87,6 +85,9 @@ class UserProfileScreen extends Component {
         super(props);
         const {params} = this.props.route;
         const uid = params ? params.uid : null;
+        const name = params ? params.name : null;
+        const num = params ? params.num : null;
+        this.state = { name: name, phonenum: num };
         this.getImage(uid);
     }
 
@@ -98,7 +99,7 @@ class UserProfileScreen extends Component {
         return (
             <View style={styles.mainView}>
                 <Image
-                source={{uri: this.state.image}}
+                source={{uri: this.state.image? this.state.image : null}}
                 style={{width:90, height: 90, borderRadius: 80 /2}}
                 />
                 <TouchableOpacity
@@ -113,7 +114,6 @@ class UserProfileScreen extends Component {
                     <TextInput
                         value={this.state.name}
                         style={styles.input}
-                        placeholder="NAME" 
                         placeholderTextColor="#003f5c"
                         onChangeText={text=>this.setState({name:text})}
                          // 개행
@@ -127,7 +127,6 @@ class UserProfileScreen extends Component {
                     <TextInput
                         value={this.state.phonenum}
                         style={styles.input}
-                        placeholder="PHONE NUMBER" 
                         placeholderTextColor="#003f5c"
                         onChangeText={text=>this.setState({phonenum:text})}
                          // 개행

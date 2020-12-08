@@ -115,6 +115,7 @@ componentWillUnmount() {
         {
           this.state.cafeInfo.map((item, idx)=>(
             <TouchableOpacity
+              key={idx}
               style={styles.cafeBtn}
               onPress={()=>{
                 this.getImage(idx);
@@ -154,10 +155,10 @@ componentWillUnmount() {
 
 const styles = StyleSheet.create({
   cafeBtn:{
-    width:"65%",
+    width:"80%",
     backgroundColor:"#E6E6E6",
     borderRadius:25,
-    height:50,
+    height:40,
     alignItems:"center",
     justifyContent:"center",
     marginTop:10,
@@ -165,10 +166,10 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   regBtn:{
-    width:"65%",
+    width:"80%",
     backgroundColor:"#fb5b5a",
     borderRadius:25,
-    height:50,
+    height:40,
     alignItems:"center",
     justifyContent:"center",
     marginTop:10,

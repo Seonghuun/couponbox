@@ -23,7 +23,7 @@ class CompleteCouponPan extends Component{
         
         <ImageBackground
           source = {{uri: stamp_bg_uri }}
-          style={{width: 330, height: 530, top: 100, left:15}}
+          style={{width: 330, height: 530, top: 75, left:15}}
         >
           
             
@@ -33,7 +33,7 @@ class CompleteCouponPan extends Component{
         style={{fontSize: 20, top:225, left:100, color:'#797D7F', alignContent:'center'}}>heloo</Text> */}
         <TouchableOpacity
           style={{
-            top: 220, left:110,
+            top: 200, left:110,
               width:"25%",
               backgroundColor:"#CACFD2",
               borderRadius:25,

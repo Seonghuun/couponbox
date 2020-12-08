@@ -268,7 +268,7 @@ componentWillUnmount() {
               </View>
 
               <Image
-                    style={{height:80, width:80, marginRight:10}} 
+                    style={{height:80, width:80, marginLeft:30, marginRight:10}} 
                     source={{uri: this.state.imageUrl?this.state.imageUrl:null }}
               />
           </View>

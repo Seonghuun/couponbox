@@ -21,7 +21,7 @@ class CafeDataScreen extends Component {
 
             <View style={styles.mainView}>
                 <Image
-                    style={{height:300, width:350, alignItems:'center'}} 
+                    style={{height:300, width:350,alignItems:'center'}} 
                     source={{uri: imageUrl? imageUrl:null}}
                     resizeMode='contain'
                     
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
       height: '100%',
       paddingTop: 50,
       alignItems: 'center', //수평 정렬
-      // justifyContent: 'center' // 수직 정렬
+    //   justifyContent: 'center' // 수직 정렬
     },
     btnView: {
         flex:1,
