@@ -28,7 +28,7 @@ class CouponPannel extends Component{
           {[...Array(couponData.stampNum)].map((n, index) => (
             <Image
             source = {{uri: stamp_img_uri}}
-            style={{position: 'absolute', width: '25%', height:'15%', top:80+Math.floor(index/2)*62, left:65+92*(index%2)}}
+            style={{position: 'absolute', width: '25%', height:'12%',resizeMode:'contain', top:92+Math.floor(index/2)*62, left:67+92*(index%2)}}
             />
             
           ))}
