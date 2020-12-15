@@ -24,9 +24,10 @@ class CompleteCouponPan extends Component{
           style={{width: 330, height: 530, top: 75, left:15}}
         >
           
+          
             
           <Text
-        style={{fontSize: 20, top:425, left:100, color:'#797D7F', alignContent:'center'}}>{couponData.cafeName}</Text>
+        style={{fontSize: 20, top:425, left:-10, color:'#797D7F', alignSelf:'center'}}>{couponData.cafeName}</Text>
         {[...Array(10)].map((n, index) => (
             <Image
             source = {{uri: stamp_img_uri}}

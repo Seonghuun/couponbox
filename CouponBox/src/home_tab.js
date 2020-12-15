@@ -131,7 +131,11 @@ class TabHomeScreen extends Component {
         
         return (
                 <ScrollView style={styles.scrollView}>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={()=>{
+                            this.props.navigation.navigate('Map')
+                        }}
+                    >
                         <Image
                         style={{alignItems:'center', marginBottom: 20}}
                         source = {require('../assets/images/searchbar.png')}
