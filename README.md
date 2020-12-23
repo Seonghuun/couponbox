@@ -10,8 +10,10 @@
 따라서 본 쿠폰 박스 모바일 앱은 여러 개인 카페의 쿠폰을 통합 관리하는 것을 목표로 한다.
 쿠폰 박스를 통해 고객은 자신이 보유한 쿠폰의 정보를 효율적으로 관리 할 수 있고, 점주는 '종이 쿠폰' 인쇄 비용 절감, 쿠폰 발급 이력확인 등의 효과를 얻을 수 있다.
 
-## 2. 시스템 구조
-<img height="400" width="800" src="./Img/struct.png"> 
+## 2. 시연 영상
+[![Watch the video](https://img.youtube.com/vi/CBCFBX-sDp4/mqdefault.jpg)](https://youtu.be/CBCFBX-sDp4)  
+https://youtu.be/CBCFBX-sDp4
+
 
 ## 3. 사용법 및 캡쳐화면
 
