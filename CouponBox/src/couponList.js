@@ -152,12 +152,20 @@ class CouponListScreen extends Component{
             </View>
           ))
           :
-          <Image
-            style={{top: 250,left:-90,height:400, width:600, alignItems:'center'}} 
-            source={{uri: 'https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2Fskin3%2FnoStamp.png?alt=media&token=47654298-0eed-4943-9178-0f8a21443930'}}
+          <View>
+            <Image
+            style={{top: 250,left:20,height:100, width:100, alignItems:'center'}} 
+            source={{uri: 'https://firebasestorage.googleapis.com/v0/b/couponbox-b7a3d.appspot.com/o/sprites%2Fskin3%2FnoBeverage.png?alt=media&token=faf7ff9d-f8ed-4e09-a039-e24a26d8cc1e'}}
             resizeMode='contain'
                     
-          />
+            />
+            <Text
+            style={{top:265, fontWeight:'bold'}}
+            >
+              등록된 쿠폰이 없습니다!
+            </Text>
+          </View>
+          
         }
 
       </ScrollView>
