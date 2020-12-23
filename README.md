@@ -13,53 +13,87 @@
 ## 2. 시스템 구조
 <img height="400" width="800" src="./Img/struct.png"> 
 
-## 3-1. 사용법 (점주)
+## 3. 사용법 및 캡쳐화면
+
+## 3-1. 점주용
 - 회원가입 및 로그인 
 <div>
-<img height="350" width="200" src="./Img/main_cafe.png">  
-<img height="350" width="200" src="./Img/register.png">
+<img height="390" width="180" src="./Img/bossLogin.png">  
+<img height="390" width="180" src="./Img/bossSignup.png">
 </div>
 
 - 카페 정보 등록
 <div>
-<img height="350" width="200" src="./Img/register_cafe1.png">  
-<img height="350" width="200" src="./Img/register_cafe2.png">
+<img height="390" width="180" src="./Img/bossRegister1.png">  
+<img height="390" width="180" src="./Img/bossRegister2.png">
+<img height="390" width="180" src="./Img/bossCafeList.png">
 </div>
 
-- 등록된 카페 관리 (도장 찍기 버튼 클릭 시 QR Scanner 실행)
+- 등록된 카페 관리 (QR 스캐너 버튼 클릭 시 QR Scanner 실행)
 <div>
-<img height="350" width="200" src="./Img/cafe_profile.png">
-  <img height="350" width="200" src="./Img/scan.png">
+<img height="390" width="180" src="./Img/bossCafeDetail.png">  
+<img height="390" width="180" src="./Img/bossQRScanner.png">
 </div>
 
 
-## 3-2. 사용법 (고객)
+## 3-2. 고객용
 - 회원가입 및 로그인 
 <div>
-<img height="350" width="200" src="./Img/main_customer.png">  
-<img height="350" width="200" src="./Img/register.png">
+<img height="390" width="180" src="./Img/customerLogin.png">  
+<img height="390" width="180" src="./Img/customerSignup.png">
 </div>
 
-- 고객 정보
-<img height="350" width="200" src="./Img/user_profile.png">
-
-- 카페 검색 (검색 / 현재 위치에 기반한 카페 정보 제공)
+- 카페 선택 및 도장 받기 (도장 받기 버튼 클릭 시 QR Code 생성)
 <div>
-<img height="350" width="200" src="./Img/search.png">
-<img height="350" width="200" src="./Img/map.png">
+<img height="390" width="180" src="./Img/customerCafeList.png">  
+<img height="390" width="180" src="./Img/customerCafeDetail.png">
+<img height="390" width="180" src="./Img/customerGetStamp.png">
 </div>
 
-- 카페 상세 페이지
-<img height="350" width="200" src="./Img/customer_cafe_info.png">
-
-- 도장 받기 및 쿠폰 사용
+- 쿠폰 사용 (쿠폰 사용 버튼 클릭 시 보유한 쿠폰, 도장 출력)
 <div>
-<img height="350" width="200" src="./Img/getcoupon.png">
-<img height="350" width="200" src="./Img/couponlist1.png">
-<img height="350" width="200" src="./Img/couponlist2.png">
-<img height="350" width="200" src="./Img/couponlist3.png">
+<img height="390" width="180" src="./Img/customerNoCoupon.png">  
+<img height="390" width="180" src="./Img/customerCoupon1.png">
+<img height="390" width="180" src="./Img/customerStamp1.png">
 </div>
-  
+
+- 쿠폰 및 도장 (쿠폰 사용 버튼 클릭 시 보유한 쿠폰, 도장 출력)
+<div>
+<img height="390" width="180" src="./Img/customerNoCoupon.png">  
+<img height="390" width="180" src="./Img/customerCoupon1.png">
+<img height="390" width="180" src="./Img/customerStamp1.png">
+</div>
+
+- 쿠폰 사용 (다 모은 쿠폰의 쿠폰 사용 버튼 클릭 시 QR Code 생성)
+<div>
+<img height="390" width="180" src="./Img/customerStamp1.png">  
+<img height="390" width="180" src="./Img/customerUseCoupon.png">
+</div>
 
 
+- 유저 프로필 관리 (프로필 이미지 및 정보 변경 가능)
+<div>
+<img height="390" width="180" src="./Img/userTab.png">  
+<img height="390" width="180" src="./Img/userProfile.png">
+<img height="390" width="180" src="./Img/userChangeImage.png">  
+<img height="390" width="180" src="./Img/userTab2.png">
+</div>
 
+- 지도 (등록된 카페 마커로 표시)
+<div>
+<img height="390" width="180" src="./Img/mapTab.png">  
+<img height="390" width="180" src="./Img/mapTabModal.png">
+<img height="390" width="180" src="./Img/mapTabCafe.png">  
+</div>
+
+- 카페 검색 (지도 탭에서 Search 버튼 클릭 시 검색 화면으로 이동)
+<div>
+<img height="390" width="180" src="./Img/mapTab.png">  
+<img height="390" width="180" src="./Img/Search.png">
+</div>
+
+- 쿠폰함 (보유한 모든 카페의 쿠폰 및 도장 출력)
+<div>
+<img height="390" width="180" src="./Img/couponTab1.png">  
+<img height="390" width="180" src="./Img/couponTab2.png">
+</div>
