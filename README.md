@@ -81,19 +81,19 @@
 
 - 지도 (등록된 카페 마커로 표시)
 <div>
-<img height="390" width="180" src="./Img/mapTab.png">  
-<img height="390" width="180" src="./Img/mapTabModal.png">
-<img height="390" width="180" src="./Img/mapTabCafe.png">  
+<img height="384" width="216" src="./Img/mapTab.png">  
+<img height="384" width="216" src="./Img/mapTabModal.png">
+<img height="384" width="216" src="./Img/mapTabCafe.png">  
 </div>
 
 - 카페 검색 (지도 탭에서 Search 버튼 클릭 시 검색 화면으로 이동)
 <div>
-<img height="390" width="180" src="./Img/mapTab.png">  
-<img height="390" width="180" src="./Img/Search.png">
+<img height="384" width="216" src="./Img/mapTab.png">  
+<img height="384" width="216" src="./Img/mapSearch.png">
 </div>
 
 - 쿠폰함 (보유한 모든 카페의 쿠폰 및 도장 출력)
 <div>
-<img height="390" width="180" src="./Img/couponTab1.png">  
-<img height="390" width="180" src="./Img/couponTab2.png">
+<img height="384" width="216" src="./Img/couponTab1.png">  
+<img height="384" width="216" src="./Img/couponTab2.png">
 </div>
