@@ -1,41 +1,19 @@
-# Triple H 
+# Coupon Box
 
   
 ## 1. 프로젝트 소개 
-**쿠폰 박스**
 
-대형 프랜차이즈 카페들의 경우 자체 멤버십 앱이 존재하고, 고객은 기존의 종이 쿠폰 발급이 아닌 모바일 쿠폰을 통해 효율적으로 자신의 쿠폰을 관리할 수 있다. 
+전국 카페를 브랜드 별로 나눠 살펴본 결과 대형 커피 브랜드 10곳을 제외한 중소 브랜드 및 개인카페가 90%를 차지했다.
 
-<img height="600" width="600" src="./Img/current.png">
+대형 카페가 자체 멤버십 앱을 가지고 있는데 반해, 현재 개인 카페의 경우 휴대폰 번호로 포인트를 적립하는 곳도 있으나, 대부분은 '종이 쿠폰'을 통해 도장 쿠폰을 발급하고 있다. 고객들은 여러 카페의 쿠폰을 관리하는데에 어려움을 겪고 있다. 그리고 점주도 '종이 쿠폰' 인쇄 비용, 쿠폰 관리등에 번거로움을 갖고 있다.
 
-그러나, 2020년 현재 서울 시내 카페 중 90%는 비 프랜차이즈 형태의 '동네 카페'이다.
+따라서 본 쿠폰 박스 모바일 앱은 여러 개인 카페의 쿠폰을 통합 관리하는 것을 목표로 한다.
+쿠폰 박스를 통해 고객은 자신이 보유한 쿠폰의 정보를 효율적으로 관리 할 수 있고, 점주는 '종이 쿠폰' 인쇄 비용 절감, 쿠폰 발급 이력확인 등의 효과를 얻을 수 있다.
 
-현재 '동네 카페'의 경우 포스기를 통한 쿠폰 적립을 시도하는 영업점도 있으나, 대부분은 '종이 쿠폰'을 통해 쿠폰을 발급하고 있다. 고객들은 수많은 '동네 카페'의 쿠폰을 독립적으로 관리해야 하고, 이로 인해 자신의 쿠폰을 관리하는 데 큰 어려움 겪고 있다. 
-
-'동네 카페'들의 쿠폰들을 하나의 플랫폼으로 관리할 수 있도록 해주는 '쿠폰 박스'를 통해 고객은 자신이 가지고 있는 쿠폰 정보를 잊지 않고 효율적으로 관리할 수 있다.
-
-'점주' 입장에서는 '종이 쿠폰' 인쇄 및 자체 시스템을 통한 쿠폰 관리 등의 비용을 절감할 수 있다. 또한, 고객들에게 투명하게 쿠폰의 적립 내역을 제공해줌으로써 카페에 대한 고객들의 재방문성을 높여 '매출 증대' 효과를 기대할 수 있다.
-
-
-  
-## 2. Abstract
-**Coupon Box**
-
-Large franchise cafes have their own membership app, and customers can manage their coupons efficiently through mobile coupons rather than traditional paper coupons.
-
-However, as of 2020, 90% of cafes in downtown Seoul are 'neighborhood cafes' in the form of non-franchises.
-
-Currently, in the case of 'Neighborhood Cafe', there are branches that try to accumulate coupons through POS, but most of them issue coupons through 'paper coupons'. Customers have to independently manage coupons for numerous' 'neighborhood cafes', which is causing great difficulty in managing their own coupons.
-
-Through the 'Coupon Box', which allows the coupons of 'neighborhood cafes' to be managed through a single platform, customers can efficiently manage their coupon information without forgetting.
-
-For the 'store owner', it is possible to reduce costs such as printing 'paper coupons' and managing coupons through its own system. 
-In addition, it is possible to expect a 'sales increase' effect by enhancing the revisitability of customers to cafes by transparently providing coupon accumulation details to customers.
-   
-## 3. 시스템 구조
+## 2. 시스템 구조
 <img height="400" width="800" src="./Img/struct.png"> 
 
-## 4. 사용법 (점주)
+## 3-1. 사용법 (점주)
 - 회원가입 및 로그인 
 <div>
 <img height="350" width="200" src="./Img/main_cafe.png">  
@@ -55,7 +33,7 @@ In addition, it is possible to expect a 'sales increase' effect by enhancing the
 </div>
 
 
-## 5. 사용법 (고객)
+## 3-2. 사용법 (고객)
 - 회원가입 및 로그인 
 <div>
 <img height="350" width="200" src="./Img/main_customer.png">  
