@@ -52,13 +52,6 @@ https://youtu.be/CBCFBX-sDp4
 <img height="390" width="180" src="./Img/customerGetStamp.png">
 </div>
 
-- 쿠폰 사용 (쿠폰 사용 버튼 클릭 시 보유한 쿠폰, 도장 출력)
-<div>
-<img height="390" width="180" src="./Img/customerNoCoupon.png">  
-<img height="390" width="180" src="./Img/customerCoupon1.png">
-<img height="390" width="180" src="./Img/customerStamp1.png">
-</div>
-
 - 쿠폰 및 도장 (쿠폰 사용 버튼 클릭 시 보유한 쿠폰, 도장 출력)
 <div>
 <img height="390" width="180" src="./Img/customerNoCoupon.png">  
